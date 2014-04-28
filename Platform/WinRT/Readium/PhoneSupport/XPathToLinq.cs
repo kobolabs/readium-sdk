@@ -27,6 +27,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using PhoneSupportInterfaces;
+using System.Xml.XPath;
 
 namespace ReadiumPhoneSupport
 {
@@ -41,9 +42,22 @@ namespace ReadiumPhoneSupport
     {
         public static object ProcessXPathExpression(XNode node, string xpath, IXmlNamespaceResolver nsResolver)
         {
-            char[] separator = {'/'};
-            List<string> remainingXPathNodes = xpath.Split(separator).ToList<string>();
-            return ProcessNextXPathComponent(node, remainingXPathNodes.GetEnumerator(), nsResolver);
+            IList<object> retList;
+            var evaluated = node.XPathEvaluate(xpath, nsResolver);
+            if (evaluated != null)
+            {
+                retList = new List<object>();
+                foreach (object element in (IEnumerable<object>)evaluated)
+                {
+                    retList.Add(element);
+                }
+            }
+            else
+            {
+                retList = new List<object>();
+            }
+
+            return retList;
         }
 
         public static IXmlNamespaceResolver MakeNamespaceResolver(object namespaceList)
@@ -96,14 +110,14 @@ namespace ReadiumPhoneSupport
         internal static IXmlNodeList NodeListFromXPathResult(object selected)
         {
             if (selected == null)
-                return new XmlNodeList(null);
+                return new XmlNodeList();
 
             var type = selected.GetType();
 
-            List<XObject> linqList = null;
-            if (selected is List<XObject>)
+            IList<XObject> linqList = null;
+            if (selected  is IList)
             {
-                linqList = selected as List<XObject>;
+                linqList = ((IList)selected).Cast<XObject>().ToList();// as IList<XObject>;
             }
             else if (type.IsArray)
             {
@@ -128,11 +142,22 @@ namespace ReadiumPhoneSupport
             bool more = remainingXPathNodes.MoveNext();
             bool deep = false;
 
-            if ((thisXPathNode == null || thisXPathNode.Length == 0) && more)
+            while ((thisXPathNode == null || thisXPathNode.Length == 0) && more)
             {
                 deep = true;
                 thisXPathNode = remainingXPathNodes.Current;
                 more = remainingXPathNodes.MoveNext();
+            }
+
+            if (current.GetType() == typeof(XDocument)) 
+            {
+                XDocument doc = current as XDocument;
+
+                if (doc.FirstNode.GetNodeName().Equals(XNameFromString(thisXPathNode, nsResolver))) 
+                {
+                    thisXPathNode = remainingXPathNodes.Current;
+                    more = remainingXPathNodes.MoveNext();
+                }
             }
 
             if (thisXPathNode == ".")
@@ -155,7 +180,7 @@ namespace ReadiumPhoneSupport
                 ret = GetMatchingChildElements(current, thisXPathNode, nsResolver);
             }
 
-            if (more)
+            if (more && ret != null)
                 return ProcessNextXPathComponent(ret, remainingXPathNodes, nsResolver);
 
             return ret;
@@ -193,9 +218,9 @@ namespace ReadiumPhoneSupport
 
             object matched = null;
             if (elementName == "*")
-                matched = container.Descendants();
+                matched = container.Descendants().ToList().FirstOrDefault();
             else
-                matched = container.Descendants(XNameFromString(elementName, nsResolver));
+                matched = (from c in container.Descendants(XNameFromString(elementName, nsResolver)) select c).ToList().FirstOrDefault();
 
             if (matchClauseStart == -1)
                 return matched;
@@ -225,9 +250,23 @@ namespace ReadiumPhoneSupport
 
             object matched = null;
             if (elementName == "*")
-                matched = container.Elements();
+                matched = container.Elements().ToList();
+            else if (elementName.StartsWith("@"))
+            {
+                XElement element = container as XElement;
+                string attName = elementName.Substring(1, elementName.Length - 1);
+                if (element.Attribute(attName) != null)
+                {
+                    matched = element.Attribute(attName);
+                }
+                else
+                {
+                    matched = (from c in container.Elements() where c.Attribute(elementName.Substring(1, elementName.Length - 1)) != null select c).ToList();
+                }
+            }
             else
-                matched = container.Elements(XNameFromString(elementName, nsResolver));
+                matched = (from c in container.Elements(XNameFromString(elementName, nsResolver)) select c).ToList();
+
 
             if (matchClauseStart == -1)
                 return matched;

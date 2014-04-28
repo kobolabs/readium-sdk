@@ -222,10 +222,16 @@
     <Content Include="References\Debug\arm\Readium.xml">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="References\Debug\arm\ReadiumPhoneSupport.dll">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="References\Debug\x86\PhoneSupportInterfaces.xml">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="References\Debug\x86\Readium.xml">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="References\Debug\x86\ReadiumPhoneSupport.dll">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="References\Retail\arm\PhoneSupportInterfaces.xml">
@@ -234,10 +240,16 @@
     <Content Include="References\Retail\arm\Readium.xml">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="References\Retail\arm\ReadiumPhoneSupport.dll">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="References\Retail\x86\PhoneSupportInterfaces.xml">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="References\Retail\x86\Readium.xml">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="References\Retail\x86\ReadiumPhoneSupport.dll">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="SDKManifest.xml">

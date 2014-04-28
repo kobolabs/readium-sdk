@@ -38,6 +38,11 @@ namespace ReadiumPhoneSupport
             _nodes = new List<XObject>(nodes);
         }
 
+        internal XmlNodeList()
+        {
+            _nodes = new List<XObject>();
+        }
+
         public IXmlNode Item(uint index)
         {
             return this[(int)index];
@@ -51,7 +56,18 @@ namespace ReadiumPhoneSupport
         [System.Runtime.CompilerServices.IndexerName("Items")]
         public IXmlNode this[int index]
         {
-            get { return NodeConversion.ConvertNode(_nodes[index]); }
+            get
+            {
+                if (_nodes.Count > 0)
+                {
+                    return NodeConversion.ConvertNode(_nodes[index]);
+
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
         
         public int Count
