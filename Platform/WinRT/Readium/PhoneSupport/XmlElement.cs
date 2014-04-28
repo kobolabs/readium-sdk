@@ -50,7 +50,8 @@ namespace ReadiumPhoneSupport
         /// <returns>The string value of the attribute.</returns>
         public string GetAttribute(string attributeName)
         {
-            return GetAttributeNode(attributeName).Value;
+            var att = GetAttributeNode(attributeName);
+            return att != null ? att.Value : "";
         }
 
         /// <summary>
@@ -61,7 +62,8 @@ namespace ReadiumPhoneSupport
         /// <returns>The string value of the attribute.</returns>
         public string GetAttributeNS(object namespaceUri, string attributeName)
         {
-            return GetAttributeNodeNS(namespaceUri, attributeName).Value;
+            var att = GetAttributeNodeNS(namespaceUri, attributeName);
+            return att != null ?  att.Value : "";
         }
 
         /// <summary>
