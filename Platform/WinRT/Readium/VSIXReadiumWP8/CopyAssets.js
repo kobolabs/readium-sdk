@@ -73,31 +73,6 @@ var assetsReadiumWP8 =
     ["\\deploy\\ARCHITECTURE\\CONFIGURATION\\ReadiumWP8\\Readium.xml",   "References\\CONFIGURATION\\ARCHITECTURE\\"]
 ]
 
-/* Copy  Include files */
-var includeDir = "DesignTime\\CommonConfiguration\\Neutral\\Include";
-WScript.Echo("Copying 'Public Interface' to '" + includeDir + "'");
-
-var path = fso.BuildPath(srcRoot, "\\*.h");
-try {
-    WScript.Echo("path: '" + path + "'");
-    
-    if (!fso.FolderExists(rootFolder + "\\" + includeDir)) {
-        var pathElements = includeDir.split("\\");
-        var currentPath = rootFolder;
-        for (var l in pathElements) {
-            currentPath = currentPath + "\\" + pathElements[l];
-            if (!fso.FolderExists(currentPath)) {
-                WScript.Echo("Folder Doesn't Exists: '" + currentPath + "'");
-                fso.CreateFolder(currentPath);
-            }
-        }
-    }
-
-    fso.CopyFile(path, includeDir, true);
-} catch (e) {
-    WScript.Echo("Error: '" + e.description + "'  '" + e.message + "'");
-}
-
 for (var i in configurations) {
 
     for (var j in architecturesPhoneSupport) {
