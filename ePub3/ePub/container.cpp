@@ -81,7 +81,7 @@ bool Container::Open(const string& path)
 #if EPUB_USE(LIBXML2)
 	_ocf = reader.xmlReadDocument(gContainerFilePath, nullptr, XML_PARSE_RECOVER|XML_PARSE_NOENT|XML_PARSE_DTDATTR);
 #else
-	decltype(_ocf) __tmp(reader.ReadDocument(gContainerFilePath, nullptr, /*RESOLVE_EXTERNALS*/ 1));
+	decltype(_ocf) __tmp(reader.ReadDocument(gContainerFilePath, nullptr, ePub3::xml::PROHIBIT_DTD));
 	_ocf = __tmp;
 #endif
 	if (!((bool)_ocf))

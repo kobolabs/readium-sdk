@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Readium", "Readium\Readium.vcxproj", "{A6CC9E63-8351-4B12-ABAD-90A28D8D587D}"
 EndProject
@@ -81,7 +81,6 @@ Global
 		{C2EAFC93-3E4C-49ED-AED7-AF3A77864C16}.Debug|x86.Build.0 = Debug|x86
 		{C2EAFC93-3E4C-49ED-AED7-AF3A77864C16}.Release|Any CPU.ActiveCfg = Release|x86
 		{C2EAFC93-3E4C-49ED-AED7-AF3A77864C16}.Release|ARM.ActiveCfg = Release|ARM
-		{C2EAFC93-3E4C-49ED-AED7-AF3A77864C16}.Release|ARM.Build.0 = Release|ARM
 		{C2EAFC93-3E4C-49ED-AED7-AF3A77864C16}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{C2EAFC93-3E4C-49ED-AED7-AF3A77864C16}.Release|Mixed Platforms.Build.0 = Release|x86
 		{C2EAFC93-3E4C-49ED-AED7-AF3A77864C16}.Release|Win32.ActiveCfg = Release|x86
@@ -101,7 +100,6 @@ Global
 		{71999345-AE10-4E5A-AFC2-B5CF9FE52B34}.Debug|x86.Build.0 = Debug|Win32
 		{71999345-AE10-4E5A-AFC2-B5CF9FE52B34}.Release|Any CPU.ActiveCfg = Release|Win32
 		{71999345-AE10-4E5A-AFC2-B5CF9FE52B34}.Release|ARM.ActiveCfg = Release|ARM
-		{71999345-AE10-4E5A-AFC2-B5CF9FE52B34}.Release|ARM.Build.0 = Release|ARM
 		{71999345-AE10-4E5A-AFC2-B5CF9FE52B34}.Release|Mixed Platforms.ActiveCfg = Release|Win32
 		{71999345-AE10-4E5A-AFC2-B5CF9FE52B34}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{71999345-AE10-4E5A-AFC2-B5CF9FE52B34}.Release|Win32.ActiveCfg = Release|Win32
@@ -121,7 +119,6 @@ Global
 		{FD16FEC4-AA83-49D5-AF95-15ADDD20C29D}.Debug|x86.Build.0 = Debug|Win32
 		{FD16FEC4-AA83-49D5-AF95-15ADDD20C29D}.Release|Any CPU.ActiveCfg = Release|Win32
 		{FD16FEC4-AA83-49D5-AF95-15ADDD20C29D}.Release|ARM.ActiveCfg = Release|ARM
-		{FD16FEC4-AA83-49D5-AF95-15ADDD20C29D}.Release|ARM.Build.0 = Release|ARM
 		{FD16FEC4-AA83-49D5-AF95-15ADDD20C29D}.Release|Mixed Platforms.ActiveCfg = Release|Win32
 		{FD16FEC4-AA83-49D5-AF95-15ADDD20C29D}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{FD16FEC4-AA83-49D5-AF95-15ADDD20C29D}.Release|Win32.ActiveCfg = Release|Win32
