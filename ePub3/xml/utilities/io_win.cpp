@@ -400,11 +400,19 @@ std::shared_ptr<Document> InputBuffer::ReadDocument(const char* url, const char*
 
 	std::size_t found = str.find(L"\r\n");
 	while (found != std::string::npos) {
-		str.replace(found, 2, L"\n");
+		str.replace(found, 2, L"\n ");
 
-		found = str.find(L"\r\n");
+		found = str.find(L"\r\n", found);
 	}
 
+	if (((options & PROHIBIT_DTD) == PROHIBIT_DTD)) {
+		found = str.find(L"<!DOCTYPE");
+		if (found != std::string::npos)
+		{
+			std::size_t found2 = str.find(L">", found);
+			str.replace(found, (found2 - found) + 1, L"");
+		}
+	}
 	bool hasBOM = (str[0] == 0xfffe || str[0] == 0xfeff);
 	::Platform::String^ nstr = ref new String(str.data() + (hasBOM ? 1 : 0), static_cast<unsigned int>(str.length()) - (hasBOM ? 1 : 0));
 
