@@ -380,28 +380,32 @@ std::shared_ptr<Document> InputBuffer::ReadDocument(const char* url, const char*
 	return new Document(task->GetResults());
 #else
 	typedef std::wstring_convert<std::codecvt_utf8<wchar_t>> Converter;
+
 	static const size_t BUF_SIZE = 4096;
-	std::wstring str;
+	std::vector<uint8_t> strBuf;
+	
 	uint8_t buf[BUF_SIZE];
 	Converter converter;
 	int numRead = 0;
-
+	int offset = 0;
 	do
 	{
 		numRead = static_cast<int>(this->read(buf, BUF_SIZE));
 		if (numRead > 0)
 		{
-			str.append(converter.from_bytes(reinterpret_cast<char*>(buf), reinterpret_cast<char*>(buf + numRead)));
+			strBuf.insert(strBuf.end(), buf, buf + numRead);
 		}
 
 	} while (numRead > 0);
 
 	this->close();
+	strBuf.shrink_to_fit();
+	strBuf.push_back('\0');
+	std::wstring str(converter.from_bytes(reinterpret_cast<char*>(&(strBuf[0])), reinterpret_cast<char*>(&(strBuf[strBuf.size() - 1]))));
 
 	std::size_t found = str.find(L"\r\n");
 	while (found != std::string::npos) {
 		str.replace(found, 2, L"\n ");
-
 		found = str.find(L"\r\n", found);
 	}
 
