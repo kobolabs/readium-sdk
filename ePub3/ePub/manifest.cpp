@@ -198,15 +198,21 @@ shared_ptr<ManifestItem> ManifestItem::Fallback() const
 }
 string ManifestItem::BaseHref() const
 {
-    // get base part of href
-    string path;
-    size_t s = _href.find_first_of("#?");
-    if ( s == string::npos )
-        path = _href;
-    else
-        path = path.substr(0, s);
-    return path;
+	// get base part of href
+	string path;
+
+	unsigned found = _href.stl_str().find_last_of("#?");
+	if (found == string::npos)
+		path = _href;
+	else {
+		static REGEX_NS::regex::flag_type reflags(REGEX_NS::regex::icase | REGEX_NS::regex::optimize);
+		static REGEX_NS::regex re("(.(htm|html|xhtml|xml|jpg|jpeg|png|gif|svg))$", reflags);
+		string sub = _href.substr(0, found);
+		path = REGEX_NS::regex_match(sub.stl_str(), re) ? sub : _href;
+	}
+	return path;
 }
+
 bool ManifestItem::HasProperty(const std::vector<IRI>& properties) const
 {
     for ( const IRI& iri : properties )
