@@ -3426,7 +3426,7 @@ async(launch __policy, _Fp&& __f, _Args&&... __args)
     
     return __r;
 }
-#if !EPUB_PLATFORM(WINRT)
+#if !EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 template <class _Fp, class ..._Args>
 future<typename __invoke_of<typename std::decay<_Fp>::type, typename std::decay<_Args>::type...>::type>
 async(_Fp&& __f, _Args&&... __args)

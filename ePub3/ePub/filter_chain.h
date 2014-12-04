@@ -25,7 +25,7 @@ EPUB3_BEGIN_NAMESPACE
 class FilterContext;
 
 class FilterChain : public PointerType<FilterChain>
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	, public NativeBridge
 #endif
 {

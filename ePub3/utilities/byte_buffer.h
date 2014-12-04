@@ -11,7 +11,7 @@
 
 #include <ePub3/epub3.h>
 
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 namespace Readium { class BridgedByteBuffer; };
 #endif
 
@@ -118,7 +118,7 @@ private:
     size_t m_bufferCapacity;
     // whether to zero unused bytes
     bool m_secure;
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	friend class ::Readium::BridgedByteBuffer;
 #endif
 };

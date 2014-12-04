@@ -33,7 +33,7 @@
 #include <ePub3/xml/node.h>
 #include <ePub3/Forward.h>
 
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 #include <ePub3/utilities/NativeBridge.h>
 #endif
 

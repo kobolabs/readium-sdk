@@ -179,18 +179,16 @@ typedef signed long ssize_t;
 # define __PRETTY_FUNCTION__ __FUNCTION__
 #endif
 
-#if EPUB_PLATFORM(WIN) || EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WIN) || EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 # define strncasecmp _strnicmp
 # define snprintf(buf,count,fmt,...) _snprintf_s(buf, count, count, fmt, __VA_ARGS__)
 #endif
 
 #if EPUB_PLATFORM(WINRT)
+# define EPUB_USE_WIN_XML 1
+#elif EPUB_PLATFORM(WIN_PHONE)
 # define EPUB_USE_LIBXML2 0
-# if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)
-#  define EPUB_USE_WIN_XML 1
-# elif WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PHONE)
-#  define EPUB_USE_WIN_PHONE_XML 1
-# endif
+# define EPUB_USE_WIN_PHONE_XML 1
 # define EPUB_ENABLE_XML_BUILDER 0
 # define EPUB_ENABLE_XML_C14N 0
 #else

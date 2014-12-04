@@ -56,7 +56,7 @@ static string GetTempFilePath(const string& ext)
 
     string r(tmpFile);
     return r;
-#elif EPUB_PLATFORM(WINRT)
+#elif EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	typedef std::wstring_convert<std::codecvt_utf8<wchar_t>> ToUTF8;
 
 	auto tempFolder = ::Windows::Storage::ApplicationData::Current->TemporaryFolder;

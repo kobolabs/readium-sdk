@@ -13,7 +13,7 @@
 
 #if EPUB_PLATFORM(MAC)
 #include <CoreFoundation/CoreFoundation.h>
-#elif EPUB_PLATFORM(WINRT)
+#elif EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 #include <ppltasks.h>
 #endif
 
@@ -249,7 +249,7 @@ void __thread_pool_impl_stdcpp::_RunTimer()
     }
 }
 
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 __thread_pool_impl_winrt::__thread_pool_impl_winrt(int num_threads)
 	: _work_items(),
 	  _timers(),
@@ -303,11 +303,11 @@ void __thread_pool_impl_winrt::add_after(std::chrono::system_clock::duration& re
 }
 #endif
 
-#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(MAC)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(MAC) || EPUB_PLATFORM(WIN_PHONE)
 class __main_thread_executor : public scheduled_executor
 {
 private:
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	static ::Windows::UI::Core::CoreDispatcher^	_mainDispatcher;
 	static void SetMainDispatcher(::Windows::UI::Core::CoreDispatcher^ dispatcher);
 #endif
@@ -400,7 +400,7 @@ void __main_thread_executor::add_after(std::chrono::system_clock::duration& rel_
     auto abs_time = std::chrono::system_clock::now() + rel_time;
 	add_at(abs_time, closure);
 }
-#elif EPUB_PLATFORM(WINRT)
+#elif EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 ::Windows::UI::Core::CoreDispatcher^ __main_thread_executor::_mainDispatcher = nullptr;
 void __main_thread_executor::SetMainDispatcher(::Windows::UI::Core::CoreDispatcher^ dispatcher)
 {

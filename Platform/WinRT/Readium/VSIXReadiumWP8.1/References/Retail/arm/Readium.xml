@@ -1,0 +1,3820 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        "Readium.WindowsPhone"
+    </assembly>
+    <members>
+        <member name="T:ePub3.ArchiveXmlWriter">
+@ingroup archives
+
+</member>
+        <member name="T:ePub3.ArchiveXmlReader">
+@ingroup archives
+
+</member>
+        <member name="T:ePub3.xml.Node">
+@ingroup tree
+
+</member>
+        <member name="M:ePub3.xml.TypeString(ePub3.xml.NodeType)">
+@ingroup xml-utils
+
+</member>
+        <member name="M:ePub3.ByteBuffer.Compact">
+Ensures that the receiver takes up only the amount of memory that is actually
+required.
+
+</member>
+        <member name="M:ePub3.ByteBuffer.RemoveBytes(System.UInt32,System.UInt32)">
+Removes a number of bytes from the the buffer.
+@param numBytesToRemove The number of bytes to remove.
+@note If this is used a lot, would be useful to maintain a start/end range rather
+than just a size-- this would make 'removal' much simpler and O(1).
+
+</member>
+        <member name="M:ePub3.ByteBuffer.AddBytes(System.Byte*,System.UInt32)">
+Appends bytes to the internal buffer.
+@param extraBytes A pointer to the bytes to append.
+@param extraBytesSize The number of bytes in extraBytes.
+
+</member>
+        <member name="M:ePub3.ByteBuffer.MoveTo(System.Byte*,System.UInt32)">
+Moves bytes from the receiver into another memory range.
+
+The receiver keeps its allocation and storage, though its size will be reduced.
+If data remains in the receiver, the remainder will be moved to the start of its
+internal storage.
+
+Call Compact() to collapse the size of the receiver's buffer.
+
+@param targetBuffer A pointer to memory into which to copy the receiver's content.
+@param targetBufferSize The size of targetBuffer.
+@result The number of bytes copied into targetBuffer.
+
+</member>
+        <member name="M:ePub3.ByteBuffer.SetUsesSecureErasure(System.Boolean)">
+Tells the buffer to perform secure erasure by zeroing all unused memory.
+
+This will also trigger a data cache flush where supported.
+@param value `true` to perform secure erasure, `false` otherwise.
+
+</member>
+        <member name="T:ePub3.prealloc_buf_t">
+Special value passed to ByteBuffer initializer to tell it to only set its capacity,
+not its size.
+
+</member>
+        <member name="T:ePub3.string">
+@ingroup utilities
+
+</member>
+        <member name="M:ePub3.SetErrorHandler(std.function&lt;(ePub3.error_details!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)(ePub3.error_details!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced&amp;)&gt;)">
+
+Sets the current error hander function.
+</member>
+        <member name="M:ePub3.ErrorHandler">
+
+Retrieves the current error handler function.
+</member>
+        <member name="M:ePub3.DefaultErrorHandler(ePub3.error_details!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+The default error handler. Always returns `false` except for Critical spec violations.
+</member>
+        <member name="D:ePub3.ErrorHandlerFn">
+Error handler function type.
+@param err The error code being raised.
+@result Return `true` to continue, ignoring the error, `false` to throw the error.
+
+</member>
+        <member name="M:ePub3.ArchiveWriter.write(System.Void!System.Runtime.CompilerServices.IsConst*,System.UInt32)">
+Writes data to this object's target file.
+@param p A buffer from which to read data.
+@param len The size of the buffer at `p`. No more than this number of bytes will
+be written to the archive during this call.
+@result Returns the number of bytes written, or `-1` in case of error.
+
+</member>
+        <member name="M:ePub3.ArchiveWriter.op_LogicalNot">
+
+Returns `true` if writing is possible (i.e. no error has occurred).
+</member>
+        <member name="T:ePub3.ArchiveWriter">
+A simple stream-like writer object used to add data to an archive.
+@deprecated This object has been superceded by the ByteStream API.
+@ingroup archives
+
+</member>
+        <member name="M:ePub3.ArchiveReader.read(System.Void*,System.UInt32)">
+Reads data from this object's target file.
+@param p A buffer into which to place data.
+@param len The size of the buffer at `p`. No more than this number of bytes will
+be read from the archive during this call.
+@result Returns the number of bytes read, or `-1` in case of error.
+
+</member>
+        <member name="M:ePub3.ArchiveReader.op_LogicalNot">
+
+Returns `true` if reading is possible (i.e. no error has occurred).
+</member>
+        <member name="T:ePub3.ArchiveReader">
+A simple stream-like reader object used to fetch data from an archive.
+@deprecated This object has been superceded by the ByteStream API.
+@ingroup archives
+
+</member>
+        <member name="M:ePub3.ArchiveItemInfo.POSIXPermissions">
+
+POSIX-style access permissions, if supported.
+</member>
+        <member name="M:ePub3.ArchiveItemInfo.UncompressedSize">
+
+The uncompressed size of the item.
+</member>
+        <member name="M:ePub3.ArchiveItemInfo.CompressedSize">
+
+The compressed size of the item.
+</member>
+        <member name="M:ePub3.ArchiveItemInfo.IsCompressed">
+
+Whether the item is compressed.
+</member>
+        <member name="M:ePub3.ArchiveItemInfo.Path">
+
+Retrieves the item's p4ath within an archive.
+</member>
+        <member name="M:ePub3.ArchiveItemInfo.#ctor(ePub3.ArchiveItemInfo*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move constructor
+</member>
+        <member name="M:ePub3.ArchiveItemInfo.#ctor(ePub3.ArchiveItemInfo!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy constructor
+</member>
+        <member name="M:ePub3.ArchiveItemInfo.#ctor">
+
+Default constructor
+</member>
+        <member name="T:ePub3.ArchiveItemInfo">
+Encapsulates detailed information on a file within an archive.
+@ingroup archives
+
+</member>
+        <member name="M:ePub3.Archive.op_Assign(ePub3.Archive*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move constructor.
+</member>
+        <member name="M:ePub3.Archive.op_Assign(ePub3.Archive!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Archive objects cannot be copied.
+</member>
+        <member name="M:ePub3.Archive.InfoAtPath(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Returns detailed information on a file within the archive.
+@param path The path to an existing file within the archive.
+@result An object containing detailed information on the requested item.
+
+</member>
+        <member name="M:ePub3.Archive.POSIXPermissions(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Obtain POSIX-style permissions for a file, if supported.
+
+The default implementation returns zero.
+
+</member>
+        <member name="M:ePub3.Archive.SetPOSIXPermissions(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.UInt16)">
+Apply POSIX-style permissions to a file within the archive, if supported.
+
+The default implementation does nothing.
+
+</member>
+        <member name="M:ePub3.Archive.ShouldCompress(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.UInt32)">
+Determines whether a given file ought to be compressed when stored in the archive.
+
+The default implementation looks at the `mediaType` to check for pre-compressed
+image, audio, or video data, for which it returns `false`. It will also return
+`false` for any file below 1024KB in size. For all other input, it returns 
+`true`.
+@param path The path of an item. Does not need to exist in the archive.
+@param mimeType The MIME type or media-type of the data to be stored.
+@param size The number of bytes expected to be written.
+@result Returns `true` if the data is considered appropriate to compress, `false`
+if the archive implementor believes compression is unnecessary.
+
+</member>
+        <member name="M:ePub3.Archive.AsyncByteStreamAtPath(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Obtains a stream to asynchronously read or write to a file within the archive.
+@param path The path of the item to access.
+@result Returns a (managed) pointer to the resulting byte stream, or `nullptr`.
+
+</member>
+        <member name="M:ePub3.Archive.ByteStreamAtPath(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Obtains a stream to read or write to a file within the archive.
+@param path The path of the item to access.
+@result Returns a (managed) pointer to the resulting byte stream, or `nullptr`.
+
+</member>
+        <member name="M:ePub3.Archive.CreateFolder(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Creates a folder in an archive.
+@param path The path within the archive for the new folder.
+@result Returns `true` if the polder was created, `false` otherwise.
+
+</member>
+        <member name="M:ePub3.Archive.DeleteItem(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Delete an item from an archive.
+@note The return value indicates whether the item is no longer present in the
+archive, *not* whether it was actually deleted by this function. If the item is
+not found, this method will return `true`.
+@param path The path within the archive of the item to remove.
+@result Returns `true` if the item is no longer in the archive, `false`
+otherwise.
+
+</member>
+        <member name="M:ePub3.Archive.ContainsItem(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Check whether an item exists within an archive.
+@param path A path within the archive to a specific item.
+@result Returns `true` if an item exists with that path, `false` otherwise.
+
+</member>
+        <member name="M:ePub3.Archive.Path">
+
+Retrieves the filesystem path of this archive.
+</member>
+        <member name="M:ePub3.Archive.Open(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Open an archive.
+@param path A filesystem path to an archive file.
+@result An opened instance of an Archive subclass or `nullptr`.
+
+</member>
+        <member name="M:ePub3.Archive.Initialize">
+
+Initialize the library, registering the default archive types.
+</member>
+        <member name="M:ePub3.Archive.RegisterArchive(std.function&lt;(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced&amp;)&gt;,std.function&lt;(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced&amp;)&gt;)">
+Register an archive factory.
+@param creator A function object which, when invoked with a path, will return
+an opened instance of an Archive subclass (or `nullptr` upon failure).
+@param sniffer A function object which, whin invoked with a path, will return
+`true` if it represents an archive which can be opened using the function object
+in the `creator` argument.
+
+</member>
+        <member name="D:ePub3.Archive.ArchiveRegistrationDomain">
+
+A list of factories.
+</member>
+        <member name="T:ePub3.Archive.ArchiveFactory">
+A simple class which encapsulates a factory for Archive subclasses.
+
+</member>
+        <member name="D:ePub3.Archive.SnifferFn">
+
+Type of a function which determines whether a file is a certain type of archive.
+</member>
+        <member name="D:ePub3.Archive.CreatorFn">
+
+Type of a function which creates an Archive from a file.
+</member>
+        <member name="F:ePub3.Archive.SmallestCompression">
+
+Smallest compressed file size, usually the slowest to compress/decompress.
+</member>
+        <member name="F:ePub3.Archive.FastestCompression">
+
+Fastest operation, usually the least compression.
+</member>
+        <member name="F:ePub3.Archive.Uncompressed">
+
+Don't compress.
+</member>
+        <member name="F:ePub3.Archive.DefaultCompression">
+
+Use the default compression level for the archive type.
+</member>
+        <member name="D:ePub3.Archive.CompressionLevel">
+
+Types for predefined archive compression levels.
+</member>
+        <member name="T:ePub3.Archive">
+An abstract class representing a generic archive.
+
+@ingroup archives
+
+</member>
+        <member name="T:ePub3.Glossary">
+@ingroup navigation
+
+</member>
+        <member name="T:ePub3.xml.DTD">
+@ingroup validation
+
+</member>
+        <member name="T:ePub3.xml.Document">
+@ingroup tree
+
+</member>
+        <member name="T:ePub3.xml.EntityType">
+@ingroup tree
+
+</member>
+        <member name="T:ePub3.NavigationTable">
+@ingroup navigation
+
+</member>
+        <member name="M:ePub3.NavigationPoint.AbsolutePath(std.shared_ptr&lt;ePub3.Package!System.Runtime.CompilerServices.IsConst&gt;)">
+
+Turns the Content() href into an absolute value, similar to ManifestItem::AbsolutePath().
+</member>
+        <member name="T:ePub3.NavigationPoint">
+@ingroup navigation
+
+</member>
+        <member name="F:ePub3.SwitchPreprocessor.DefaultContentExtractor">
+This expression locates and extracts the content of the epub:default element.
+
+</member>
+        <member name="F:ePub3.SwitchPreprocessor.CaseContentExtractor">
+This expression locates and extracts the contents and types of each epub:case
+element.
+
+</member>
+        <member name="F:ePub3.SwitchPreprocessor.SwitchContentExtractor">
+This expression locates and isolates the content of each epub:switch element.
+
+</member>
+        <member name="F:ePub3.SwitchPreprocessor._supportedNamespaces">
+All the namespaces for content to be allowed through the filter.
+
+The default value includes **no namespaces**.
+
+</member>
+        <member name="M:ePub3.SwitchPreprocessor.SetSupportedNamespaces(std.vector&lt;ePub3.string,std.allocator&lt;ePub3.string&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Set the list of namespaces for content supported by the renderer.
+</member>
+        <member name="M:ePub3.SwitchPreprocessor.Register">
+
+Register this filter with the filter manager
+</member>
+        <member name="M:ePub3.SwitchPreprocessor.FilterData(ePub3.FilterContext*,System.Void*,System.UInt32,System.UInt32*)">
+Filters the input data using regular expressions to identify epub:switch
+compounds and replace them wholesale wih the contents of an epub:case or
+epub:default element.
+
+If the list of supported namespaces is empty, then this takes an optimized path,
+ignoring epub:case elements completely. Otherwise, it will inspect the 
+`required-namespace` attribute of each case element and will match it against
+the contents of its supported namespace list to make a decision. The first
+matching epub:case statement will be output in place of the entire switch
+compound.
+
+</member>
+        <member name="M:ePub3.SwitchPreprocessor.RequiresCompleteData">
+This processor won't work on streamed data, it requires the whole thing at once.
+
+</member>
+        <member name="M:ePub3.SwitchPreprocessor.#ctor(ePub3.SwitchPreprocessor*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+The standard C++11 'move' constructor.
+</member>
+        <member name="M:ePub3.SwitchPreprocessor.#ctor(ePub3.SwitchPreprocessor!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+The standard copy constructor.
+</member>
+        <member name="M:ePub3.SwitchPreprocessor.#ctor">
+The default constructor indicates that no additional content is supported, and
+the resulting filter will only preserve the content of epub:default tags.
+
+</member>
+        <member name="M:ePub3.SwitchPreprocessor.SniffSwitchableContent(std.shared_ptr&lt;ePub3.ManifestItem!System.Runtime.CompilerServices.IsConst&gt;)">
+Only documents whose manifest items are XHTML with the `switch` property
+will be filtered.
+</member>
+        <member name="D:ePub3.SwitchPreprocessor.NamespaceList">
+
+A list of supported namespaces, as strings.
+</member>
+        <member name="M:ePub3.FontObfuscator.BuildKey(std.shared_ptr&lt;ePub3.Container!System.Runtime.CompilerServices.IsConst&gt;)">
+Builds the obfuscaton key using data from the container.
+@param container The container for the resources to which this filter will
+apply.
+@result Always returns `true`.
+@see http://www.idpf.org/epub/30/spec/epub30-ocf.html#fobfus-keygen
+
+</member>
+        <member name="M:ePub3.FontObfuscator.FilterData(ePub3.FilterContext*,System.Void*,System.UInt32,System.UInt32*)">
+Applies the font obfuscation algorithm to the resource data.
+@see http://www.idpf.org/epub/30/spec/epub30-ocf.html#font-obfuscation
+@param data The data to process.
+@param len The number of bytes in `data`.
+@param outputLen Storage for the count of bytes being returned.
+@result The obfuscated or de-obfuscated bytes.
+
+</member>
+        <member name="M:ePub3.FontObfuscator.#ctor(ePub3.FontObfuscator*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move constructor.
+</member>
+        <member name="M:ePub3.FontObfuscator.#ctor(ePub3.FontObfuscator!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy constructor.
+</member>
+        <member name="M:ePub3.FontObfuscator.#ctor(std.shared_ptr&lt;ePub3.Container!System.Runtime.CompilerServices.IsConst&gt;)">
+Create a font obfuscation filter.
+
+The obfuscation key is built using data from every manifestation within an EPUB
+container, so the Container instance is passed in for that purpose. This is
+only used during construction.
+@see BuildKey(const Container*)
+
+</member>
+        <member name="M:ePub3.FontObfuscator.#ctor">
+
+There is no default constructor.
+</member>
+        <member name="M:ePub3.FontObfuscator.FontTypeSniffer(std.shared_ptr&lt;ePub3.ManifestItem!System.Runtime.CompilerServices.IsConst&gt;)">
+The type-sniffer for font obfuscation applicability.
+
+The sniffer looks at two things:
+
+1. The encryption information for the item must specify the font
+obfuscation algorithm.
+2. The item must be a font resource.
+
+</member>
+        <member name="T:ePub3.FontObfuscator">
+The FontObfuscator class implements font obfuscation algorithm as defined in
+Open Container Format 3.0 Â§4.
+
+The underlying algorithm is bidirectional, so this filter can actually be used both
+to obfuscate and de-obfuscate resources; as such, this filter may be applied when
+loading or when storing content.
+@see http://www.idpf.org/epub/30/spec/epub30-ocf.html#font-obfuscation
+
+</member>
+        <member name="M:ePub3.CFI.CompileCFI(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Top-level CFI compilation method.
+</member>
+        <member name="M:ePub3.CFI.CompileComponentsToList(std.vector&lt;ePub3.string,std.allocator&lt;ePub3.string&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.vector&lt;ePub3.CFI.Component,std.allocator&lt;ePub3.CFI.Component&gt;&gt;*)">
+
+Compiles CFI component strings into a component list.
+</member>
+        <member name="M:ePub3.CFI.RangedCFIComponents(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Breaks a ranged CFI string into base, start, and end CFI strings
+</member>
+        <member name="M:ePub3.CFI.CFIComponentStrings(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Breaks a CFI string into its components.
+</member>
+        <member name="M:ePub3.CFI.AppendComponents(std.basic_stringstream&lt;System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte,std.char_traits{System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte},std.allocator&lt;System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte&gt;&gt;*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std._Vector_const_iterator&lt;std._Vector_val&lt;std._Simple_types&lt;ePub3.CFI.Component&gt;&gt;&gt;,std._Vector_const_iterator&lt;std._Vector_val&lt;std._Simple_types&lt;ePub3.CFI.Component&gt;&gt;&gt;)">
+
+Appends components to a string stream. Used by Stringify().
+</member>
+        <member name="M:ePub3.CFI.Stringify(std._Vector_const_iterator&lt;std._Vector_val&lt;std._Simple_types&lt;ePub3.CFI.Component&gt;&gt;&gt;,std._Vector_const_iterator&lt;std._Vector_val&lt;std._Simple_types&lt;ePub3.CFI.Component&gt;&gt;&gt;)">
+
+Generates a string representation of the CFI between two components.
+</member>
+        <member name="M:ePub3.CFI.TotalComponents">
+
+The total number of components in a CFI, including range components.
+</member>
+        <member name="T:ePub3.CFI.Options">
+
+Options bitfield for a CFI.
+</member>
+        <member name="M:ePub3.CFI.Component.op_Assign(ePub3.CFI.Component!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Assign a new value to a component.
+</member>
+        <member name="M:ePub3.CFI.Component.op_Equality(ePub3.CFI.Component!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Compare conpoments for equality.
+</member>
+        <member name="M:ePub3.CFI.Component.#ctor(ePub3.CFI.Component*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move constructor.
+</member>
+        <member name="M:ePub3.CFI.Component.#ctor(ePub3.CFI.Component!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy constructor.
+</member>
+        <member name="M:ePub3.CFI.Component.#ctor(System.UInt32)">
+
+Creates a numeric component with no flags.
+</member>
+        <member name="M:ePub3.CFI.Component.#ctor(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Creates a component from a string.
+</member>
+        <member name="T:ePub3.CFI.Component.Point">
+
+A simple structure which defines a spatial location and can perform comparisons.
+</member>
+        <member name="T:ePub3.CFI.Component.Flags">
+
+Bitfield values identifying special status for a CFI component.
+</member>
+        <member name="T:ePub3.CFI.Component">
+
+A single component of a CFI.
+</member>
+        <member name="T:ePub3.CFI.RangedCFIAppendAttempt">
+
+An attempt was made to append components to a ranged CFI, which is not valid.
+</member>
+        <member name="T:ePub3.CFI.InvalidCFI">
+
+The exception thrown when an invalid CFI string is encountered.
+</member>
+        <member name="M:ePub3.CFI.CharacterSideBias">
+
+Returns the side-bias of a character-offset CFI.
+</member>
+        <member name="M:ePub3.CFI.Append(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Appends the components of a CFI string representation.
+@note It is not possible to append components to a ranged CFI.
+@throws RangedCFIAppendAttempt if the LHS is a ranged CFI.
+
+</member>
+        <member name="M:ePub3.CFI.Append(ePub3.CFI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Appends the components of one CFI to another.
+@note It is not possible to append components to a ranged CFI.
+@throws RangedCFIAppendAttempt if the LHS is a ranged CFI.
+
+</member>
+        <member name="M:ePub3.CFI.op_Assign(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Assigns a new value to a CFI from a CFI string representation.
+</member>
+        <member name="M:ePub3.CFI.Assign(ePub3.CFI*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Assigns a new value to a CFI by moving.
+</member>
+        <member name="M:ePub3.CFI.Assign(ePub3.CFI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Assigns a new value to a CFI by copying.
+</member>
+        <member name="M:ePub3.CFI.op_Inequality(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Determines whether a CFI is inequal to a CFI string representation.
+</member>
+        <member name="M:ePub3.CFI.op_Inequality(ePub3.CFI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Determines whether two CFIs are inequal.
+</member>
+        <member name="M:ePub3.CFI.op_Equality(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Determines whether a CFI is equal to a CFI string representation.
+</member>
+        <member name="M:ePub3.CFI.op_Equality(ePub3.CFI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Determines whether two CFIs are equal.
+</member>
+        <member name="M:ePub3.CFI.Clear">
+
+Clears a CFI, making it empty.
+</member>
+        <member name="M:ePub3.CFI.Empty">
+Determine if a CFI is empty.
+@result Returns `true` if the CFI has no components, `false` otherwise.
+
+</member>
+        <member name="M:ePub3.CFI.IsRangeTriplet">
+Determine whether a CFI represents a location or a range.
+@result Returns `true` if the CFI represents a range, `false` otherwise.
+
+</member>
+        <member name="M:ePub3.CFI.String">
+Obtains a string representation of the CFI.
+@result A CFI string, including the `epubcfi(...)` wrapper.
+
+</member>
+        <member name="M:ePub3.CFI.#ctor(ePub3.CFI*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+C++11 move constructor.
+</member>
+        <member name="M:ePub3.CFI.#ctor(ePub3.CFI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Create a copy of an existing CFI.
+</member>
+        <member name="M:ePub3.CFI.#ctor(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Create a CFI from a string representation.
+@param str A string representation of a CFI; the `epubcfi(...)` wrapping is
+optional.
+
+</member>
+        <member name="M:ePub3.CFI.#ctor(ePub3.CFI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.CFI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.CFI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Create a ranged CFI from a base and two relative CFIs.
+@param base A CFI consisting of components common to both the start and end of
+the resulting range.
+@param start A relative CFI denoting the path from `base` to the start of a
+range.
+@param end A relative CFI denoting the path from `base` to the end of a range.
+
+</member>
+        <member name="M:ePub3.CFI.#ctor">
+
+Create an empty CFI.
+</member>
+        <member name="T:ePub3.CFI.SideBias">
+
+Value for side-bias for a character location.
+</member>
+        <member name="T:ePub3.CFI">
+The CFI class implements an EPUB 3 Content Fragment Identifier.
+
+A CFI is similar in principle to a DOMRange: it identifies a particular location
+within a publication.
+
+@ingroup epub-model
+
+</member>
+        <member name="M:ePub3.IRI.URIString">
+Obtains a valid ASCII URL representation of this IRI.
+
+Percent-encodes all URL-reserved characters and all non-ASCII characters outside
+the hostname using those characters' UTF-8 representations. Uses IDN algorithm to
+obtain an ASCII representation of any Unicode hostname.
+@result An ASCII URL string; even though the result is a Unicode string type, the
+characters are guaranteed to be valid ASCII suitable for use with non-Unicode
+libraries.
+
+</member>
+        <member name="M:ePub3.IRI.IRIString">
+@}
+Obtains a Unicode string representation of this IRI.
+
+Only percent-encodes URL-reserved characters within components, and uses IDN
+algorithm to obtain a Unicode hostname.
+
+Note that any components which are already URL-encoded will not be explicitly
+decoded by this function.
+@result A Unicode IRI string.
+
+</member>
+        <member name="M:ePub3.IRI.IDNEncodeHostname(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Converts an IDN (hostname in non-ASCII Unicode format) into its ASCII representation.
+</member>
+        <member name="M:ePub3.IRI.PercentEncodeUCS(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Percent-encodes the UTF-8 representation of any non-ASCII characters in a string.
+</member>
+        <member name="M:ePub3.IRI.URLEncodeComponent(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+@}
+@{
+@name Helper Methods
+
+URL-encodes a path, query, or fragment component.
+</member>
+        <member name="M:ePub3.IRI.SetContentFragmentIdentifier(ePub3.CFI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Sets a URL IRI's fragment using a Content Fragment Identifier.
+
+</member>
+        <member name="M:ePub3.IRI.SetFragment(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Adds or replaces the fragment component of a URL IRI.
+@param fragment The new fragment string.
+
+</member>
+        <member name="M:ePub3.IRI.SetQuery(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Adds or replaces the query component of a URL IRI.
+@param query The new query string.
+
+</member>
+        <member name="M:ePub3.IRI.AddPathComponent(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Appends a new component to a URL IRI's path.
+@param component The new path component.
+
+</member>
+        <member name="M:ePub3.IRI.SetCredentials(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Sets credentials for this IRI.
+@param user The username for the credential.
+@param pass The shared-secret part of the credential.
+
+</member>
+        <member name="M:ePub3.IRI.SetPort(System.UInt16)">
+Assigns a port number to this IRI.
+@param port The new port number.
+
+</member>
+        <member name="M:ePub3.IRI.SetHost(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Assigns a host to this IRI.
+@note The host **must not** contain a port number. Any instance of the
+characters '`[`', '`]`', or '`:`' will cause the host to be rejected, as these
+characters are only valid in IPv6-address hostnames such as `[ff:8::1]`.
+@param host The new host component.
+
+</member>
+        <member name="M:ePub3.IRI.SetScheme(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Assigns a scheme to this IRI.
+@param scheme The new scheme.
+
+</member>
+        <member name="M:ePub3.IRI.ContentFragmentIdentifier">
+Returns any CFI present in a URL IRI.
+
+If the fragment part of a URL is a valid Content Fragment Identifier (i.e. if
+the URL's fragment begins with `epubcfi(`) then this will parse the fragment
+into a CFI representation.
+@result A valid CFI if one is present in the URL's fragment, or an empty CFI if
+no content fragment identifier is present.
+
+</member>
+        <member name="M:ePub3.IRI.LastPathComponent">
+
+Obtains the last path component of a URL IRI.
+</member>
+        <member name="M:ePub3.IRI.Fragment">
+
+Retrieves any fragment part of a URL IRI.
+</member>
+        <member name="M:ePub3.IRI.Query">
+
+Retrieves the query portion of a URL IRI, if any.
+</member>
+        <member name="M:ePub3.IRI.Path(System.Boolean)">
+Obtains the path component of a URL IRI.
+@param URLEncoded If `true`, returns the path in URL-encoded format. Otherwise,
+the path will be decoded first, yielding a standard POSIX file-system path.
+
+</member>
+        <member name="M:ePub3.IRI.Port">
+
+Obtains the port number associated with a URL IRI.
+</member>
+        <member name="M:ePub3.IRI.NamespacedString">
+
+Returns the namespace-qualified part of a URN IRI.
+</member>
+        <member name="M:ePub3.IRI.Credentials">
+
+Retrieves any credentials attached to an IRI.
+</member>
+        <member name="M:ePub3.IRI.Host">
+
+Retrieves the nost component of a URL IRI.
+</member>
+        <member name="M:ePub3.IRI.NameID">
+
+Obtains the name-id component of a URN IRI.
+</member>
+        <member name="M:ePub3.IRI.Scheme">
+@{
+@name Component Introspection
+
+Obtains the IRI's scheme component.
+</member>
+        <member name="M:ePub3.IRI.IsEmpty">
+
+Returns `true` if the IRI is empty.
+</member>
+        <member name="M:ePub3.IRI.IsRelative">
+
+Returns `true` if the IRI is a URL referencing a relative location.
+</member>
+        <member name="M:ePub3.IRI.IsURN">
+@}
+
+Returns `true` if the IRI is a URN.
+</member>
+        <member name="M:ePub3.IRI.op_LessThan(ePub3.IRI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Less-than comparator.
+
+This is here to add std::sort() support to IRIs.
+@param o An IRI against which to compare.
+@result Returns `true` if `*this` is less than `o`, `false` otherwise.
+
+</member>
+        <member name="M:ePub3.IRI.op_Inequality(ePub3.IRI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Compares two IRIs for inequality.
+@param o An IRI to compare.
+@result Returns `true` if the IRIs are *not* equal, `false` otherwise.
+
+</member>
+        <member name="M:ePub3.IRI.op_Equality(ePub3.IRI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+@}
+@{
+@name Comparators
+Compares two IRIs for equality.
+@param o An IRI to compare.
+@result Returns `true` if the IRIs are equal, `false` otherwise.
+
+</member>
+        <member name="M:ePub3.IRI.op_Assign(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Assigns the IRI the value represented by the given string.
+@param str The IRI string to parse and assign.
+@throw std::invalid_argument if the input string does not represent a valid IRI.
+
+</member>
+        <member name="M:ePub3.IRI.op_Assign(ePub3.IRI*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Assigns ownership of the value of another IRI (move assignment).
+</member>
+        <member name="M:ePub3.IRI.op_Assign(ePub3.IRI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+@{
+@name Assignment
+
+Assigns the value of another IRI (copy assignment).
+</member>
+        <member name="M:ePub3.IRI.#ctor(ePub3.IRI*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+C++11 move-constructor.
+</member>
+        <member name="M:ePub3.IRI.#ctor(ePub3.IRI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Create a copy of an existing IRI.
+</member>
+        <member name="M:ePub3.IRI.#ctor(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Create a simple URL.
+
+The URL will be in the format:
+
+    [scheme]://[host][path]?[query]#[fragment]
+
+If the path is empty or does not begin with a path separator character (`/`),
+one will be inserted automatically.
+@param scheme The URL scheme.
+@param host The host part of the URL.
+@param path The URL's path.
+@param query Any query components of the URL, properly URL-encoded.
+@param fragment A fragmuent used to identify a particular location within a
+resource.
+
+</member>
+        <member name="M:ePub3.IRI.#ctor(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Create a URN.
+
+Follows the form 'urn:`nameID`:`namespacedString`'.
+@param nameID The identifier/namespace for the resource name.
+@param namespacedString The resource name.
+
+</member>
+        <member name="M:ePub3.IRI.#ctor(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Create a new IRI.
+@param iriStr A valid URL or IRI string.
+
+</member>
+        <member name="M:ePub3.IRI.#ctor">
+
+Initializes an empty (and thus invalid) IRI.
+</member>
+        <member name="F:ePub3.IRI.gEPUBScheme">
+
+The IRI scheme used to refer to EPUB 3 documents.
+</member>
+        <member name="D:ePub3.IRI.IRICredentials">
+
+A type encapsulating an account and shared-secret pair, such as username and password.
+</member>
+        <member name="T:ePub3.IRI">
+The IRI class encapsulates all URL and URN storage in Readium.
+
+The EPUB 3 specification calls for IRIs rather than URIs (i.e. Unicode characters
+are allowed and should not be implicitly encoded) in matching properties and other
+identifiers. This class provides URN support internally, URL support through
+Google's GURL library, and Unicode IRI support is wrapped around GURL.
+
+@ingroup utilities
+
+</member>
+        <member name="M:ePub3.CustomRenderer.op_FunctionCall(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.map&lt;ePub3.string,ePub3.string,std.less&lt;ePub3.string&gt;,std.allocator&lt;std.pair&lt;ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string&gt;&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Invokes the custom renderer.
+
+This implementation simply invokes the callback function provided when this
+object was created, passing it the input resource path and a reference to the
+owning Package instance. It does not use the `parameters` argument at all.
+@param src The Package-relative path to a resource to display.
+@param parameters Parameters to the renderer. Unused.
+
+</member>
+        <member name="M:ePub3.CustomRenderer.#ctor(ePub3.CustomRenderer*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move constructor.
+</member>
+        <member name="M:ePub3.CustomRenderer.#ctor(ePub3.CustomRenderer!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy constructor.
+</member>
+        <member name="M:ePub3.CustomRenderer.#ctor(std.shared_ptr&lt;ePub3.Package&gt;*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.function&lt;(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.shared_ptr&lt;ePub3.Package!System.Runtime.CompilerServices.IsConst&gt;)(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced&amp;,std.shared_ptr&lt;ePub3.Package!System.Runtime.CompilerServices.IsConst&gt;)&gt;)">
+Creates a new custom renderer.
+@param mediaType The media-type that this object handles.
+@param pkg The Package to which this handler is assigned.
+@param impl A callback function to the native renderer.
+
+</member>
+        <member name="M:ePub3.CustomRenderer.#ctor">
+
+No default constructor.
+</member>
+        <member name="D:ePub3.CustomRenderer.RendererImpl">
+A custom resource renderer callback.
+@param src The Package-relative path to a resource.
+@param pkg The Package containing the resource.
+
+</member>
+        <member name="T:ePub3.CustomRenderer">
+Implements a means by which a native renderer for a foreign media-type can be invoked.
+
+This class is initialized with a callback function; whenever a matching resource is
+to be loaded, this callback will be invoked, passing in the Package-relative
+resource path and a reference to its containing Package.
+
+@ingroup media-handlers
+
+</member>
+        <member name="M:ePub3.MediaHandler.Target(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.map&lt;ePub3.string,ePub3.string,std.less&lt;ePub3.string&gt;,std.allocator&lt;std.pair&lt;ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string&gt;&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Returns a URL to load the DHTML media handler for a resource.
+@param src The Package-relative path to a resource to display.
+@param parameters URL query parameters to the DHTML media handler.
+
+</member>
+        <member name="M:ePub3.MediaHandler.op_FunctionCall(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.map&lt;ePub3.string,ePub3.string,std.less&lt;ePub3.string&gt;,std.allocator&lt;std.pair&lt;ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string&gt;&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Invokes the media handler with a given resource and parameters.
+
+This class's implementation constructs a URL to the DHTML media handler and
+adds `src` as a URL query parameter along with any additional parameters
+provided.
+@param src The Package-relative path to a resource to display.
+@param parameters A set of key/value pairs defining additional parameters to the
+media handler.
+
+</member>
+        <member name="M:ePub3.MediaHandler.#ctor(ePub3.MediaHandler*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move constructor.
+</member>
+        <member name="M:ePub3.MediaHandler.#ctor(ePub3.MediaHandler!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy constructor.
+</member>
+        <member name="M:ePub3.MediaHandler.#ctor(std.shared_ptr&lt;ePub3.Package&gt;*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Creates a media handler.
+@param pkg The Package to which this handler is assigned.
+@param mediaType The media-type to which this handler should apply.
+@param handlerPath A Package-relative path to the DHTML media handler for
+`mediaType` resources.
+
+</member>
+        <member name="M:ePub3.MediaHandler.#ctor">
+
+No default constructor.
+</member>
+        <member name="T:ePub3.MediaHandler">
+A ContentHandler subclass which uses an `OPF` DHTML foreign media handler to display
+resources.
+
+@ingroup media-handlers
+
+</member>
+        <member name="M:ePub3.ContentHandler.op_FunctionCall(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.map&lt;ePub3.string,ePub3.string,std.less&lt;ePub3.string&gt;,std.allocator&lt;std.pair&lt;ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string&gt;&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Invokes the handler.
+@param src The Package-relative path to a resource of this handler's media-type.
+@param parameters A list of key/value pairs defining parameters to be used when
+handling the resource.
+
+</member>
+        <member name="M:ePub3.ContentHandler.MediaType">
+
+Obtains the media-type this object handles.
+</member>
+        <member name="M:ePub3.ContentHandler.#ctor(ePub3.ContentHandler*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move constructor.
+</member>
+        <member name="M:ePub3.ContentHandler.#ctor(ePub3.ContentHandler!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy constructor.
+</member>
+        <member name="M:ePub3.ContentHandler.#ctor(std.shared_ptr&lt;ePub3.Package&gt;*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Creates a content handler (abstract class).
+@param mediaType The media type to which this handler should apply.
+@param pkg The Package to which this handler is assigned.
+
+</member>
+        <member name="M:ePub3.ContentHandler.#ctor">
+
+No default constructor.
+</member>
+        <member name="D:ePub3.ContentHandler.ParameterList">
+
+A list of key/value pairs a resource's invocation parameters.
+</member>
+        <member name="M:ePub3.DigitalSignature.Validate">
+
+Performs validation of the digital signature.
+</member>
+        <member name="M:ePub3.DigitalSignature.op_Assign(ePub3.DigitalSignature*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move assignment operator.
+</member>
+        <member name="M:ePub3.DigitalSignature.op_Assign(ePub3.DigitalSignature!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+No copy assignment operator.
+</member>
+        <member name="M:ePub3.DigitalSignature.#ctor(ePub3.DigitalSignature!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+No copy constructor.
+</member>
+        <member name="M:ePub3.DigitalSignature.#ctor(ePub3.DigitalSignature*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move constructor.
+</member>
+        <member name="D:ePub3.DigitalSignature.algorithm_type">
+
+Digital signature algorithms are identified using URI strings.
+</member>
+        <member name="T:ePub3.DigitalSignature">
+Encapsulates details of a digital signature in an EPUB container.
+
+@todo Implement.
+@ingroup epub-model
+
+</member>
+        <member name="M:ePub3.MediaSupportInfo.MatchingManifestItems(std.shared_ptr&lt;ePub3.Package&gt;)">
+@}
+Constructs a list of manifest items with this media type.
+@param pkg The package whose manifest to look through.
+@result A vector containing manifest items matching the receiver's media type.
+
+</member>
+        <member name="M:ePub3.MediaSupportInfo.SetTypeAndSupport(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,&lt;unknown type&gt;)">
+@}
+@{
+@name Setters
+Sets the media type and its support state.
+
+This is here as a convenience to anyone working with C++ containers.
+@param mediaType The media type.
+@param support The type of support provided.
+
+</member>
+        <member name="M:ePub3.MediaSupportInfo.RequiresMediaHandler">
+Queries whether a type is supported through the use of a special handler.
+
+</member>
+        <member name="M:ePub3.MediaSupportInfo.HasIntrinsicSupport">
+Queries whether a type is supported intrinsically by the rendering engine.
+
+</member>
+        <member name="M:ePub3.MediaSupportInfo.Support">
+Returns the type of support as a SupportType code.
+
+</member>
+        <member name="M:ePub3.MediaSupportInfo.MediaType">
+@{
+@name Accessors
+Returns the media type represented by this object.
+
+</member>
+        <member name="M:ePub3.MediaSupportInfo.op_Assign(ePub3.MediaSupportInfo*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+C++11 move assignment operator.
+</member>
+        <member name="M:ePub3.MediaSupportInfo.op_Assign(ePub3.MediaSupportInfo!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy assignment operator.
+</member>
+        <member name="M:ePub3.MediaSupportInfo.Dispose">
+
+Destructor.
+</member>
+        <member name="M:ePub3.MediaSupportInfo.#ctor(ePub3.MediaSupportInfo*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+C++11 'move' constructor.
+</member>
+        <member name="M:ePub3.MediaSupportInfo.#ctor(ePub3.MediaSupportInfo!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy constructor.
+</member>
+        <member name="M:ePub3.MediaSupportInfo.#ctor(std.shared_ptr&lt;ePub3.Package&gt;,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,&lt;unknown type&gt;)">
+
+The real constructor takes a specific SupportType value.
+</member>
+        <member name="M:ePub3.MediaSupportInfo.#ctor(std.shared_ptr&lt;ePub3.Package&gt;,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Boolean)">
+
+A simple constructor, normally used to define intrinsic support.
+</member>
+        <member name="M:ePub3.MediaSupportInfo.#ctor(std.shared_ptr&lt;ePub3.Package&gt;)">
+
+The default constructor creates an object with no information.
+</member>
+        <member name="T:ePub3.MediaSupportInfo.SupportType">
+
+Possible types of support provided.
+</member>
+        <member name="D:ePub3.MediaSupportInfo.ManifestItemList">
+
+A list of manifest items.
+</member>
+        <member name="T:ePub3.MediaSupportInfo">
+The MediaSupportInfo class provides at-a-glance information to the EPUB engine describing
+whether a given manifest item can be handled by the reading system.
+
+A media type can be intrinsically supported as an EPUB 3 core media type or
+a foreign media type which is supported by the rendering engine. Alternatively a
+type might be supported through a DHTML handler defined through the `bindings`
+element from an OPF file. Any other types are considered unsupported, thus triggering
+selection of any fallback manifest item in its stead.
+
+@ingroup utilities
+
+</member>
+        <member name="M:ePub3._getProp(std.shared_ptr&lt;ePub3.xml.Node&gt;,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*)">
+Reads a property (attribute) value from an XML node.
+
+Thi method performs all the book-keeping of strings copied from `libxml` properties.
+@param node The node whose property to read.
+@param name The name of the property.
+@param nsURI The URI of the namespace that defines the property.
+@result A string containing the property value, or an empty string if none was found.
+@ingroup utilities
+
+</member>
+        <member name="F:ePub3.PropertyHolder.CoreMediaTypes">
+
+The list of Core Media Types from [OPF 3.0 Â§5.1](http://idpf.org/epub/30/spec/epub30-publications.html#sec-core-media-types).
+</member>
+        <member name="D:ePub3.PropertyHolder.PropertyVocabularyMap">
+
+A lookup table for property vocabulary IRI stubs, indexed by prefix.
+</member>
+        <member name="D:ePub3.PropertyHolder.PropertyIRIList">
+
+An array of concrete property IRIs.
+</member>
+        <member name="D:ePub3.PropertyHolder.PropertyList">
+
+An array of Metadata items, in document order.
+</member>
+        <member name="D:ePub3.Property.ValueMap">
+@}
+</member>
+        <member name="M:ePub3.Property.AddExtension(std.shared_ptr&lt;ePub3.PropertyExtension&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Adds a new PropertyExtension which refines this Property's value.
+@param ext The new extension.
+
+</member>
+        <member name="M:ePub3.Property.AllExtensionsWithIdentifier(ePub3.IRI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Retrieves all extensions with a given type (property IRI).
+@param property A property IRI.
+@result A list of all Extensions whose property matches `property`.
+
+</member>
+        <member name="M:ePub3.Property.ExtensionWithIdentifier(ePub3.IRI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Retrieves an extension identified by a particular property IRI.
+@param property A property IRI.
+@result An Extension with the given property IRI, if one was found. Otherwise
+returns `nullptr`.
+
+</member>
+        <member name="M:ePub3.Property.Extensions">
+@}
+@{
+@name Extensions
+
+Retrieve the list of all this Metadata item's extensions.
+</member>
+        <member name="M:ePub3.Property.LocalizedValue(std.locale!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Obtains the value according to a given locale, if one is available.
+
+Note that localized variants of a value can be specified by adding extensions
+to this property. The property's primary value may be matched to a locale by
+specifying a language value using SetLanguage(), but alternatives can *only*
+be specified using PropertyExtensions.
+@param locale A locale to use when searching for localized values.
+@result A localized version of the property's value if available, or else
+returns the non-localized value as returned from the Value() method.
+
+</member>
+        <member name="M:ePub3.Property.SetLanguage(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Sets an explicit language for this property, to be serialized as an xml:lang attribute.
+@param lang A language code from [IETF BCP 47](http://tools.ietf.org/html/rfc4646).
+
+</member>
+        <member name="M:ePub3.Property.Language">
+
+The language in which the metadata value is rendered, if specified.
+</member>
+        <member name="M:ePub3.Property.SetValue(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Sets the value of this property.
+@param value The new value, as a string.
+
+</member>
+        <member name="M:ePub3.Property.Value">
+
+The value of this metadata item.
+</member>
+        <member name="M:ePub3.Property.SetPropertyIdentifier(ePub3.IRI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Sets the type of this property using an EPUB 3 identifier IRI.
+
+The DCType value is set in concert with the given IRI.
+@param iri The EPUB 3 property identifier.
+
+</member>
+        <member name="M:ePub3.Property.PropertyIdentifier">
+
+The canonical property IRI which identifies this item's type.
+</member>
+        <member name="M:ePub3.Property.SetDCType(&lt;unknown type&gt;)">
+Sets the type of this property using a DCMES type code.
+
+This also sets the IRI to match.
+@param type The new DCMES type code.
+
+</member>
+        <member name="M:ePub3.Property.Type">
+@{
+@name Basic Attributes
+
+The optimized type code for this metadata element.
+</member>
+        <member name="D:ePub3.Property.ExtensionList">
+
+A list of Extension objects.
+</member>
+        <member name="T:ePub3.PageProgression">
+
+Enumeration for page progression directions.
+</member>
+        <member name="T:ePub3.PageSpread">
+
+Enumeration for page spreads.
+</member>
+        <member name="T:ePub3.WritingDirection">
+
+Enumeration for writing direction values.
+</member>
+        <member name="T:ePub3.DCType">
+
+Enumerated constants for the DCMES metadata attributes used by EPUB 3.
+</member>
+        <member name="M:ePub3.PropertyExtension.SetLanguage(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Sets the property's language, encoded in XML as an `xml:lang` attribute.
+@param lang The new language value, from [IETF BCP 47](http://tools.ietf.org/html/rfc4646).
+
+</member>
+        <member name="M:ePub3.PropertyExtension.Language">
+
+The language of the item (if applicable).
+</member>
+        <member name="M:ePub3.PropertyExtension.SetValue(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Sets the property's string value.
+@param value The new value.
+
+</member>
+        <member name="M:ePub3.PropertyExtension.Value">
+
+The extension's value.
+</member>
+        <member name="M:ePub3.PropertyExtension.SetScheme(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Sets the property's scheme identifier.
+@param scheme The new scheme.
+
+</member>
+        <member name="M:ePub3.PropertyExtension.Scheme">
+
+Retrieves a scheme constant which determines how the Value() is interpreted.
+</member>
+        <member name="M:ePub3.PropertyExtension.SetPropertyIdentifier(ePub3.IRI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Sets the property's identifier IRI.
+@param ident The new identifier.
+
+</member>
+        <member name="M:ePub3.PropertyExtension.PropertyIdentifier">
+
+Retrieves the extension's property IRI, declaring its type.
+</member>
+        <member name="M:ePub3.PropertyExtension.#ctor(ePub3.PropertyExtension*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+C++11 move constructor.
+</member>
+        <member name="M:ePub3.PropertyExtension.#ctor(std.shared_ptr&lt;ePub3.Property&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Create a new Extension.
+@param node The XML element node from which this item is to be created.
+@param owner The Package to which the metadata belongs; used for property
+IRI resolution.
+
+</member>
+        <member name="M:ePub3.PropertyExtension.#ctor(ePub3.PropertyExtension!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+No copy constructor.
+</member>
+        <member name="M:ePub3.PropertyExtension.#ctor">
+
+No default constructor.
+</member>
+        <member name="T:ePub3.PropertyExtension">
+
+An extension to an existing property, providing additional related metadata.
+</member>
+        <member name="M:ePub3.Container.LoadEncryption">
+
+Parses the file META-INF/encryption.xml into an EncryptionList.
+</member>
+        <member name="M:ePub3.Container.SetCreator(std.shared_ptr&lt;ePub3.ContentModule&gt;)">
+
+Asserts ownership of a Container from a ContentModule.
+</member>
+        <member name="M:ePub3.Container.Creator">
+
+Returns the ContentModule which created this container, if any.
+</member>
+        <member name="M:ePub3.Container.GetArchive">
+
+The underlying archive.
+</member>
+        <member name="M:ePub3.Container.ReadStreamAtPath(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Obtains a pointer to a ReadStream for a specific file within the container.
+@param path A container-relative path to the file whose data to read.
+@result A std::unique_ptr for a new stream to the specified file, or `nullptr`
+if the file was not found.
+
+</member>
+        <member name="M:ePub3.Container.FileExistsAtPath(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Determines whether a given file is present in the container.
+@param path The absolute path of the item.
+@result `true` if the item exists, `false` otherwise.
+
+</member>
+        <member name="M:ePub3.Container.EncryptionInfoForPath(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Retrieves the encryption information for a specific file within the container.
+@param path A container-relative path to the item whose encryption information
+to retrieve.
+@result Returns the encryption information, or `nullptr` if none was found.
+
+</member>
+        <member name="M:ePub3.Container.EncryptionData">
+
+Retrieves the encryption information embedded in the container.
+</member>
+        <member name="M:ePub3.Container.Version">
+
+The OCF version of the container document.
+</member>
+        <member name="M:ePub3.Container.DefaultPackage">
+Retrieves the default Package instance.
+
+Equivalent to `this-&gt;Packages().at(0)`.
+
+</member>
+        <member name="M:ePub3.Container.Packages">
+
+Retrieves the list of all instantiated packages within the container.
+</member>
+        <member name="M:ePub3.Container.PackageLocations">
+
+Retrieves the paths for all Package documents in the container.
+</member>
+        <member name="M:ePub3.Container.OpenContainerForContentModule(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Synchronously creates a new container. Available for the use of ContentModule implementations only.
+</member>
+        <member name="M:ePub3.Container.OpenContainerAsync(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.launch)">
+
+Asynchronously returns a new Container instance.
+</member>
+        <member name="M:ePub3.Container.OpenContainer(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Creates and returns a new Container instance by calling OpenContainerAsync() and blocking.
+</member>
+        <member name="M:ePub3.Container.Open(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Opens the archive at a given path.
+</member>
+        <member name="M:ePub3.Container.#ctor">
+Create a new Container.
+
+</member>
+        <member name="M:ePub3.Container.#ctor(ePub3.Container*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+C++11 move constructor.
+</member>
+        <member name="M:ePub3.Container.#ctor(ePub3.Container!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+There is no copy constructor.
+</member>
+        <member name="D:ePub3.Container.EncryptionList">
+
+A list of encryption information.
+</member>
+        <member name="D:ePub3.Container.PackageList">
+
+A list of Packages.
+</member>
+        <member name="D:ePub3.Container.PathList">
+
+A list of container sub-item paths.
+</member>
+        <member name="T:ePub3.Container">
+The Container class provides an interface for interacting with an EPUB container,
+i.e. a `.epub` file.
+
+Each Container instance owns all its sub-items. All Packages from a single container,
+for instance, are kept around as pointers which will be deleted when the container
+is destroyed.
+
+@remarks The Container class holds owning references to the Archive instance used
+to read from the zip file, the XML document for the OCF file at META-INF/container.xml,
+all Packages within the container, and all EncryptionInfo instances from
+META-INF/encryption.xml.
+
+@ingroup epub-model
+
+</member>
+        <member name="M:ePub3.ContentFilter.FilterData(ePub3.FilterContext*,System.Void*,System.UInt32,System.UInt32*)">
+The core processing function.
+
+The filter should apply its algorithm to the input bytes, and may opt to edit
+the data in-place (this is preferred). Any data returned from this function is
+passed to the next matching filter for processing, and will ultimately be
+returned to the user agent requesting the resource data itself.
+
+The data passed in is not guaranteed to be the entire resource unless the filter
+overrides RequiresCompleteData() to return `true`.
+@param data The data to process.
+@param len The number of bytes in `data`.
+@param outputLen Storage for the count of bytes being returned.
+@result The filtered bytes.
+@see ePub3::FontObfuscator for an example of a filter which handles data in a
+piecemeal fashion.
+@see ePub3::SwitchPreprocessor or ePub3::ObjectPreprocessor for full-data
+examples.
+
+</member>
+        <member name="M:ePub3.ContentFilter.SetTypeSniffer(std.function&lt;(std.shared_ptr&lt;ePub3.ManifestItem!System.Runtime.CompilerServices.IsConst&gt;)(std.shared_ptr&lt;ePub3.ManifestItem!System.Runtime.CompilerServices.IsConst&gt;)&gt;)">
+
+Assigns a new type-sniffer to this filter.
+</member>
+        <member name="M:ePub3.ContentFilter.TypeSniffer">
+
+Obtains the type-sniffer for this filter.
+</member>
+        <member name="M:ePub3.ContentFilter.RequiresCompleteData">
+
+Subclasses can return `true` if they need all data in one chunk.
+</member>
+        <member name="M:ePub3.ContentFilter.#ctor(std.function&lt;(std.shared_ptr&lt;ePub3.ManifestItem!System.Runtime.CompilerServices.IsConst&gt;)(std.shared_ptr&lt;ePub3.ManifestItem!System.Runtime.CompilerServices.IsConst&gt;)&gt;)">
+Create a new content filter with a (required) type sniffer.
+@param sniffer The TypeSnifferFn used to determine whether to pass certain data
+through this filter.
+
+</member>
+        <member name="M:ePub3.ContentFilter.MakeFilterContext(std.shared_ptr&lt;ePub3.ManifestItem!System.Runtime.CompilerServices.IsConst&gt;)">
+	 Allocate and return a new FilterContext subclass. The default returns `nullptr`.
+
+	 Each filter is instantiated once per Package. A filter can then be used to process
+	 data from multiple ManifestItems at any one time. Any information specific to a single
+	 ManifestItem can be encapsulated within a FilterContext pointer, which will be passed
+	 into each invocation of the FilterData() method. The prospective ManifestItem is
+	 passed into this function so that it can inform the creation of filter context data.
+
+	 Filter context objects can be anything that inherits from ContextFilter, which itself
+	 asserts no conditions on the structure or implementation of the object.
+	 @param item The Manifest Item being processed, and for which the context is created.
+	 @result An object containing per-item data, or nullptr.
+
+</member>
+        <member name="M:ePub3.ContentFilter.#ctor(ePub3.ContentFilter*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+C++11 move constructor.
+</member>
+        <member name="M:ePub3.ContentFilter.#ctor(ePub3.ContentFilter!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy constructor.
+</member>
+        <member name="M:ePub3.ContentFilter.#ctor">
+
+No default constructor.
+</member>
+        <member name="D:ePub3.ContentFilter.TypeSnifferFn">
+The type-sniffer function must match this prototype.
+@param item A ManifestItem to inspect. All other information can be fetched
+            through this object.
+@result Return `true` to pass this manifest item to the corresponding filter,
+        `false` otherwise.
+
+</member>
+        <member name="F:ePub3.ContentFilter.ValidationComplete">
+
+Any items below this priority level are free to make platform-specific changes. Any validation
+will already have taken place by now.
+</member>
+        <member name="F:ePub3.ContentFilter.EPUBDecryption">
+
+This is the priority at which XML-ENC and XML-DSig filters take place.
+</member>
+        <member name="F:ePub3.ContentFilter.MustAccessRawBytes">
+
+If you absolutely must see the bytes EXACTLY as they exist in the container, use this priority.
+</member>
+        <member name="T:ePub3.ContentFilter">
+ContentFilter is an abstract base class from which all content filters must be
+derived.
+
+It implements default handling for all the methods in its interface with
+the exception of the core data-modification method FilterData().
+
+Content filters are typically invoked with multiple chunks of data while an item
+is loaded from its container. Subclasses can override RequiresCompleteData() if
+they reqire access to all the data at once in order to function, but it is
+preferred if they support streaming, for performance reasons.
+
+Content filters are *chained*, similar to a singly-linked list. When a content
+filter is installed into a Package, it goes at the head of the list. Any existing
+filter is passed to the new one's SetNextFilter() method. In this way, multiple
+filters may be installed for a single content type, with processing proceeding in
+LIFO order.
+
+The implementation *always* queries every filter in the chain: if one filter
+modifies the data, that modified data will be seen by a later filter. This means
+that a later-added filter will not 'replace' one that was added earlier.
+
+@note The next filter is contained in a std::unique_ptr; this means each filter
+in the chain 'owns' the reference to the next, and is solely responsible for
+deleting it.
+
+@ingroup filters
+
+</member>
+        <member name="T:ePub3.FilterContext">
+The FilterContext abstract class can be extended by individual filters to hold
+data unique to each pass across a single stream of data.
+
+A given filter subclass can allocate and return a new FilterContext pointer by
+overriding the MakeFilterContext() function from ContentFilter. The base
+class's implementation returns `nullptr`. It is important that each invocation of
+MakeFilterContext() return a *new instance* of the appropriate object. A single
+filter instance might be used to (simultaneously) handle multiple resource streams,
+and a new context object will be requested for each new stream, to ensure state is
+kept relative to the data stream, not the filter instance.
+
+If a custom context object is created, then the filter chain will pass it to each
+invocation of FilterData() on the same object for the same data stream.
+
+</member>
+        <member name="M:ePub3.ManifestItem.GetResourceSize">
+
+Obtain the uncompressed size of the resource.
+@note that this isn't necessarily accurate: it's only what the zip file knows.
+It's possible that the file was already compressed prior to inclusion in the ZIP.
+</member>
+        <member name="T:ePub3.ManifestItem">
+The ManifestItem class represents a single resource within a publication.
+
+Each publication package must list all files within the container that it plans to
+use. If an item is referenced either directly from the spine or from a navigation
+document, content document, etc. then it *must* have a corresponding ManifestItem.
+Reading systems *should not* allow use of any resources from the container which do
+not have a ManifestItem; in practice this requirement is often ignored, however.
+
+A ManifestItem defines a few important details of a resource within an EPUB 3
+publication:
+
+- A unique (within the same package) identifier for this resource.
+- Its location, relative to the manifestation's Package document.
+- Its media-type, usually a MIME type (although EPUB may define new values for items
+which do not have canonical MIME types assigned).
+- The identifier of any media-overlay resource in the same Manifest.
+- The identifier of any fallback manifest item to be displayed if this resource's
+media type is unrecognised by the reading system.
+- A set of properties providing additional information about the resource.
+
+@remarks A ManifestItem keeps a pointer to its owning Package, but does not assume
+any memory-management responsibility for that pointer. Each ManifestItem is owned by
+the Package from which it was loaded., and will be deleted when that Package is
+deallocated.
+
+@ingroup epub-model
+
+</member>
+        <member name="F:ePub3.ItemProperties._p">
+@}
+</member>
+        <member name="M:ePub3.ItemProperties.str">
+
+Cast to a string value suitable for use as the `properties`
+attribute of an XML manifest `item` element.
+</member>
+        <member name="M:ePub3.ItemProperties.op_Implicit~System.UInt32">
+@}
+@{
+@name Casting to Other Types
+
+Cast to a raw bitfield.
+</member>
+        <member name="M:ePub3.ItemProperties.op_ExclusiveOrAssignment(System.UInt32)">
+
+Assigns the result of a bitwise-NOT with a property bitfield.
+</member>
+        <member name="M:ePub3.ItemProperties.op_ExclusiveOrAssignment(ePub3.ItemProperties!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Assigns the result of a bitwise-NOT with another ItemProperties.
+</member>
+        <member name="M:ePub3.ItemProperties.op_BitwiseAndAssignment(System.UInt32)">
+
+Assigns the result of a bitwise-AND with a property bitfield.
+</member>
+        <member name="M:ePub3.ItemProperties.op_BitwiseAndAssignment(ePub3.ItemProperties!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Assigns the result of a bitwise-AND with another ItemProperties.
+</member>
+        <member name="M:ePub3.ItemProperties.op_BitwiseOrAssignment(System.UInt32)">
+
+Assigns the result of a bitwise-OR with a property bitfield.
+</member>
+        <member name="M:ePub3.ItemProperties.op_BitwiseOrAssignment(ePub3.ItemProperties!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Assigns the result of a bitwise-OR with another ItemProperties.
+</member>
+        <member name="M:ePub3.ItemProperties.op_ExclusiveOr(System.UInt32)">
+
+Returns a new ItemProperties that is the bitwise-NOT of `this` and a property bitfield.
+</member>
+        <member name="M:ePub3.ItemProperties.op_ExclusiveOr(ePub3.ItemProperties!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Returns a new ItemProperties that is the bitwise-NOT of two ItemProperties.
+</member>
+        <member name="M:ePub3.ItemProperties.op_OnesComplement">
+
+Returns a new ItemProperties that is the bitwise inverse of `this`.
+</member>
+        <member name="M:ePub3.ItemProperties.op_BitwiseAnd(System.UInt32)">
+
+Returns a new ItemProperties that is the bitwise-AND of `this` and a property bitfield.
+</member>
+        <member name="M:ePub3.ItemProperties.op_BitwiseAnd(ePub3.ItemProperties!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Returns a new ItemProperties that is the bitwise-AND of two ItemProperties.
+</member>
+        <member name="M:ePub3.ItemProperties.op_BitwiseOr(System.UInt32)">
+
+Returns a new ItemProperties that is the bitwise-OR of `this` and a property bitfield.
+</member>
+        <member name="M:ePub3.ItemProperties.op_BitwiseOr(ePub3.ItemProperties!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Returns a new ItemProperties that is the bitwise-OR of two ItemProperties.
+</member>
+        <member name="M:ePub3.ItemProperties.op_Assign(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Assignment from an XML `properties` attribute value string.
+</member>
+        <member name="M:ePub3.ItemProperties.op_Assign(System.UInt32)">
+
+Assignment from a property bitfield.
+</member>
+        <member name="M:ePub3.ItemProperties.op_Assign(ePub3.ItemProperties!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Assignment from another ItemProperties instance.
+</member>
+        <member name="M:ePub3.ItemProperties.op_Inequality(System.UInt32)">
+
+Compares an ItemProperties against a property bitfield for inequality.
+</member>
+        <member name="M:ePub3.ItemProperties.op_Inequality(ePub3.ItemProperties!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Compares two ItemProperties for inequality.
+</member>
+        <member name="M:ePub3.ItemProperties.op_Equality(System.UInt32)">
+
+Compares an ItemProperties against a property bitfield for equality.
+</member>
+        <member name="M:ePub3.ItemProperties.op_Equality(ePub3.ItemProperties!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+@}
+@{
+@name Arithmetic and Bitwise Operations
+
+Compares two ItemProperties for equality.
+</member>
+        <member name="M:ePub3.ItemProperties.HasProperty(ePub3.ItemProperties!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Checks for the presence of one or more properties.
+@param p The properties against which to check.
+@result Returns `true` if all properties in `p` are also in `this`.
+
+</member>
+        <member name="M:ePub3.ItemProperties.HasProperty(System.UInt32)">
+@{
+@name Tests
+Checks for the presence of one or more properties.
+@param p The property bitfield against which to check.
+@result Returns `true` if all set bits in `p` are also set in `this`.
+
+</member>
+        <member name="M:ePub3.ItemProperties.#ctor(ePub3.ItemProperties*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+C++11 move constructor.
+</member>
+        <member name="M:ePub3.ItemProperties.#ctor(ePub3.ItemProperties!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy constructor.
+</member>
+        <member name="M:ePub3.ItemProperties.#ctor(System.UInt32)">
+Creates a new instance with a given value (or None).
+@param v The bitfield value representing the property or properties set.
+
+</member>
+        <member name="M:ePub3.ItemProperties.#ctor(ePub3.IRI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Creates a new instance from a canonical property IRI.
+@param iri The IRI for a single property. This *must* be a manifest item property.
+
+</member>
+        <member name="M:ePub3.ItemProperties.#ctor(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Creates a new instance from an XML `properties` attribute string.
+@param attrStr The value of a manifest `item` element's `properties` attribute.
+
+</member>
+        <member name="D:ePub3.ItemProperties.value_type">
+
+To avoid the C++ compiler's reticence for arithmetic on `enum` types, the value is an `unsigned int`.
+</member>
+        <member name="T:ePub3.ItemProperties">
+The ItemProperties class defines an optimized representation of the applicable
+properties for a ManifestItem, as of EPUB 3.
+
+This should ideally be an `enum class`, but it seems the compiler doesn't like
+performing arithmetic or bitwise operations on those, nor does it like me defining
+those arithmetic operations as methods on an `enum class`. Therefore it's all DIY.
+
+@see http://www.idpf.org/epub/30/spec/epub30-publications.html#sec-item-property-values
+
+@ingroup epub-model
+
+</member>
+        <member name="D:ePub3.ManifestTable">
+
+A map of item-ids to manifest items.
+</member>
+        <member name="F:ePub3.XPathWrangler._doc">
+@}
+</member>
+        <member name="M:ePub3.XPathWrangler.Nodes(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.shared_ptr&lt;ePub3.xml.Node&gt;)">
+Evaluates an XPath, returning a set of all matching nodes.
+@param xpath The XPath expression to evaluate.
+@param node The root node upon which to evaluate the XPath expression. If not
+supplied, the document root node will be used.
+@result The nodes which result from evaluating the XPath expression on the
+specified subtree.
+
+</member>
+        <member name="M:ePub3.XPathWrangler.Strings(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.shared_ptr&lt;ePub3.xml.Node&gt;)">
+@{
+@name XPath Evaluation
+Evaluates an XPath, returning a list of strings as a result.
+@param xpath The XPath expression to evaluate.
+@param node The root node upon which to evaluate the XPath expression. If not
+supplied, the document root node will be used.
+@result The results of evaluating the XPath expression, coerced to string
+values.
+
+</member>
+        <member name="M:ePub3.XPathWrangler.#ctor(ePub3.XPathWrangler*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+C++11 move constructor.
+</member>
+        <member name="M:ePub3.XPathWrangler.#ctor(ePub3.XPathWrangler!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy constructor.
+</member>
+        <member name="D:ePub3.XPathWrangler.StringList">
+
+A list of strings.
+</member>
+        <member name="D:ePub3.XPathWrangler.NamespaceList">
+
+A list of namespace prefix to URI pairs.
+</member>
+        <member name="T:ePub3.XPathWrangler">
+A simple object which encapsulates the use of an XPath expression in libxml2.
+
+@ingroup utilities
+
+</member>
+        <member name="M:ePub3.EncryptionInfo.SetPath(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Assigns a Container-relative path to an encrypted resource.
+</member>
+        <member name="M:ePub3.EncryptionInfo.Path">
+
+Returns the Container-relative path to the encrypted resource.
+</member>
+        <member name="M:ePub3.EncryptionInfo.SetAlgorithm(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Assigns an algorithm identifier.
+@see Algorithm()const
+</member>
+        <member name="M:ePub3.EncryptionInfo.Algorithm">
+
+Returns an algorithm URI as defined in XML-ENC or OCF.
+@see http://www.w3.org/TR/xmlenc-core1/#sec-Table-of-Algorithms
+@see http://www.idpf.org/epub/30/spec/epub30-ocf.html#fobfus-specifying
+</member>
+        <member name="M:ePub3.EncryptionInfo.ParseXML(std.shared_ptr&lt;ePub3.xml.Node&gt;)">
+Creates a new EncryptionInfo from an EncryptionData XML element node.
+@param node An XML node, which *must* be an `EncryptionData` node as defined in
+XML-ENC.
+@see http://www.w3.org/TR/xmlenc-core1/#sec-EncryptedData
+
+</member>
+        <member name="M:ePub3.EncryptionInfo.#ctor(ePub3.EncryptionInfo*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move constructor.
+</member>
+        <member name="M:ePub3.EncryptionInfo.#ctor(ePub3.EncryptionInfo!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy constructor.
+</member>
+        <member name="M:ePub3.EncryptionInfo.#ctor(std.shared_ptr&lt;ePub3.Container&gt;)">
+
+Creates a new EncryptionInfo with no details filled in.
+</member>
+        <member name="D:ePub3.EncryptionInfo.algorithm_type">
+
+Encryption algorithms are URIs compared as strings.
+</member>
+        <member name="T:ePub3.EncryptionInfo">
+Contains details on the encryption of a single resource.
+
+At present this class holds only two pieces of information: A resource path and an
+encyption algorithm identifier (a URI string). This is all that's needed to support
+EPUB font obfuscation.
+
+In future, this class will grow to encapsulate all information from the XML-ENC
+specification.
+
+@ingroup epub-model
+@see http://www.idpf.org/epub/30/spec/epub30-ocf.html#font-obfuscation
+@see http://www.w3.org/TR/xmlenc-core1/
+
+</member>
+        <member name="F:Readium.FilterPriority.ValidationComplete">
+Any items below this priority level are free to make platform-specific changes. Any validation
+will already have taken place by now.
+</member>
+        <member name="F:Readium.FilterPriority.EPUBDecryption">
+This is the priority at which XML-ENC and XML-DSig filters take place.
+</member>
+        <member name="F:Readium.FilterPriority.MustAccessRawBytes">
+If you absolutely must see the bytes EXACTLY as they exist in the container, use this priority.
+</member>
+        <member name="T:ePub3.xml.Element">
+@ingroup tree
+
+</member>
+        <member name="T:ePub3.xml.XPathEvaluator">
+@ingroup xml-utils
+
+</member>
+        <member name="T:ePub3.iBooksOptions">
+Contains all properties and options defined by the iBooks option file in a Container.
+
+Note that this class is only used internally by the Container class. If iBooks options
+are present in a container, then the container will use those options to set the appropriate
+EPUB3 properties on all relevant packages. The iBooksOptions instance will then be discarded.
+
+@ingroup epub-model
+
+</member>
+        <member name="T:ePub3.xml.StreamOutputBuffer">
+@ingroup xml-utils
+
+</member>
+        <member name="T:ePub3.xml.StreamInputBuffer">
+@ingroup xml-utils
+
+</member>
+        <member name="T:ePub3.xml.OutputBuffer">
+@ingroup xml-utils
+
+</member>
+        <member name="T:ePub3.xml.InputBuffer">
+@ingroup xml-utils
+
+</member>
+        <member name="F:ePub3.RingBuffer._capacity">
+@}
+</member>
+        <member name="M:ePub3.RingBuffer.RemoveBytes(System.UInt32)">
+Removes bytes from the buffer.
+@note This method acquire's the instance's modification lock.
+@param len The number of bytes to remove. When `len &gt; _numBytes` the result is
+undefined.
+
+</member>
+        <member name="M:ePub3.RingBuffer.WriteBytes(System.Byte!System.Runtime.CompilerServices.IsConst*,System.UInt32)">
+Writes data into the buffer.
+@note This method acquires the instance's modification lock.
+@param  buf A buffer of at least `len` bytes from which data will be copied.
+@param len The number of bytes to copy. This can be an ideal value; if not
+enough space available, a smaller amount will be copied.
+@result The number of bytes actually copied into the ring buffer.
+
+</member>
+        <member name="M:ePub3.RingBuffer.ReadBytes(System.Byte*,System.UInt32)">
+@}
+@{
+@name Content Accessors
+Reads data from the buffer without removing it.
+@param buf A buffer of at least `len` bytes into which the data will be copied.
+@param len The number of bytes to copy. This can be an ideal value; if not
+enough bytes are available, a smaller amount will be copied.
+@result The number of bytes actually copied into `buf`.
+
+</member>
+        <member name="M:ePub3.RingBuffer.SpaceAvailable">
+@return The maximum number of bytes that may currently be written to the buffer.
+
+</member>
+        <member name="M:ePub3.RingBuffer.HasSpace">
+@return `true` if there is room to write data to the buffer.
+
+</member>
+        <member name="M:ePub3.RingBuffer.BytesAvailable">
+@return The number of bytes available to read from the buffer.
+
+</member>
+        <member name="M:ePub3.RingBuffer.HasData">
+@return `true` is there is data in the buffer, `false` otherwise.
+
+</member>
+        <member name="M:ePub3.RingBuffer.Capacity">
+@}
+@{
+@name Buffer Metadata
+Obtain the total capacity of a ring buffer.
+@result The maximum number of bytes the buffer can hold.
+
+</member>
+        <member name="M:ePub3.RingBuffer.unlock">
+Unlocks the receiver, permitting modifications to take place.
+
+</member>
+        <member name="M:ePub3.RingBuffer.try_lock">
+Attempts to lock the receiver as per lock().
+@return `true` if the lock was acquired, `false` if it was already locked by
+another thread.
+
+</member>
+        <member name="M:ePub3.RingBuffer.lock">
+@}
+@{
+@name Locking Operations
+@note The functions here are named such that the RingBuffer class satisfies the
+C++11 Lockable concept. As a result, this object can be used as the `_Mutex`
+template parameter in `std::lock_guard` and `std::unique_lock`.
+
+Locks the receiver, preventing any modification.
+
+</member>
+        <member name="M:ePub3.RingBuffer.op_Assign(ePub3.RingBuffer*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Move operator.
+@note This locks its parameter before copying.
+
+</member>
+        <member name="M:ePub3.RingBuffer.op_Assign(ePub3.RingBuffer!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+@{
+@name Assignment Operators
+Copy operator.
+@note This locks its parameter before copying.
+
+</member>
+        <member name="M:ePub3.RingBuffer.#ctor(ePub3.RingBuffer*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move constructor.
+@note This locks its argument before accessing.
+</member>
+        <member name="M:ePub3.RingBuffer.#ctor(ePub3.RingBuffer!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy constructor (identical input class).
+@note This locks its argument before accessing.
+</member>
+        <member name="M:ePub3.RingBuffer.Dispose">
+
+Destructor.
+</member>
+        <member name="M:ePub3.RingBuffer.#ctor(System.UInt32)">
+
+Constructs a new RingBuffer instance.
+</member>
+        <member name="F:ePub3.SpineItem._idref">
+@}
+</member>
+        <member name="M:ePub3.SpineItem.op_Subscript(System.Int32!System.Runtime.CompilerServices.IsLong)">
+Retrieves the spine item at a relative index.
+@param idx The relative index of the item to retrieve.
+@result A SpineItem.
+@throws std::out_of_range if `idx` is out of bounds.
+
+</member>
+        <member name="M:ePub3.SpineItem.PriorStep">
+
+Retrieves a pointer to the previous linear item in the spine, or `nullptr`.
+</member>
+        <member name="M:ePub3.SpineItem.NextStep">
+
+Retrieves a pointer to the next linear item in the spine, or `nullptr`.
+</member>
+        <member name="M:ePub3.SpineItem.Previous">
+
+Retrieves a pointer to the spine item preceding this one, or `nullptr`.
+</member>
+        <member name="M:ePub3.SpineItem.Next">
+@}
+@{
+@name Navigation
+
+Retrieves a pointer to the spine item following this one, or `nullptr`.
+</member>
+        <member name="M:ePub3.SpineItem.Title">
+
+The title for this spine item, as defined in the TOC.
+</member>
+        <member name="M:ePub3.SpineItem.Spread">
+
+Determine the spread location for this item (or for the first page thereof).
+</member>
+        <member name="M:ePub3.SpineItem.Linear">
+
+Returns `true` if this item is linear, `false` otherwise.
+</member>
+        <member name="M:ePub3.SpineItem.ManifestItem">
+
+Obtains the manifest item corresponding to this spine item.
+</member>
+        <member name="M:ePub3.SpineItem.Idref">
+
+Returns the `idref` identifying the manifest item for this spine item.
+</member>
+        <member name="M:ePub3.SpineItem.Identifier">
+
+Returns this item's identifier (if any).
+</member>
+        <member name="M:ePub3.SpineItem.Index">
+
+Returns the index of the current item in the overall spine. O(n).
+</member>
+        <member name="M:ePub3.SpineItem.Count">
+@{
+@name Metadata
+
+Returns an O(n) count of items in the spine (starting with this item).
+</member>
+        <member name="M:ePub3.SpineItem.#ctor(ePub3.SpineItem*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+C++11 move constructor.
+</member>
+        <member name="M:ePub3.SpineItem.#ctor(ePub3.SpineItem!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+There is no copy constructor.
+</member>
+        <member name="M:ePub3.SpineItem.#ctor">
+
+No default constructor.
+</member>
+        <member name="T:ePub3.SpineItem">
+The SpineItem class provides access to the spine of a publication.
+
+A publication's spine describes the top-level items contained in that publication
+in navigation order, such as the chapters of a book and its frontispiece,
+library/copyright page, dedication, index, and so on. This differs from a Table Of
+Contents in that the TOC might omit some of these items: it's not common for a TOC
+to reference the frontispiece of a book, or its cover.
+
+Additionally, the spine is used to determine where to go next when stepping from one
+content document to the next or the previous document. The appropriate spine item is
+used to determine what the next and previous items are, rather than relying on the
+TOC, which might choose not to reference certain items. The intention is that the
+spine be a one-dimensional array of all the visitable content in a publication in
+the order that it would be traversed.
+
+Most importantly, a content document **must** be referenced in the spine in order
+for it to be navigable. A TOC which references a document that's not in the spine
+is considered badly-formed.
+
+Spine items can be consedered either linear or non-linear. Non-linear items are
+those which are part of the publication's flow but which are not considered as
+candidates for next/previous steps. An example of this might be the front cover or
+the table of contents: these would typically be displayed elsewhere by a
+sufficiently advanced reading system, so simply flipping through the publication
+they would not be encountered; placing them in the spine, however, allows a CFI or
+hyperlink to still reference them directly.
+
+SpineItems in Readium are implemented as a doubly-linked list. Each SpineItem has a
+pointer to the items preceeding and succeeding it in the spine. These can be
+accessed directly using the Next() and Previous() methods. When stepping between
+spine items, however, the NextStep() and PriorStep() methods can be used to
+implicitly skip any non-linear items.
+
+@remarks As a linked-list structure, each SpineItem holds an *owning reference* to the
+following item, and a *non-owning reference* to the preceding item. When a
+SpineItem is destroyed, it will delete the next SpineItem in the chain, and will
+set its prior item's pointer-to-next to be `nullptr`.
+
+@ingroup epub-model
+
+</member>
+        <member name="M:ePub3.RunLoop.ProcessEventSource(std.shared_ptr&lt;ePub3.RunLoop.EventSource&gt;)">
+
+Process a firing event source
+</member>
+        <member name="M:ePub3.RunLoop.ProcessTimer(std.shared_ptr&lt;ePub3.RunLoop.Timer&gt;)">
+
+Process a firing timer
+</member>
+        <member name="M:ePub3.RunLoop.RunObservers(System.UInt32)">
+
+Runs all observers matching the given activity
+</member>
+        <member name="M:ePub3.RunLoop.#ctor(ePub3.RunLoop*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+No move constructor
+</member>
+        <member name="M:ePub3.RunLoop.#ctor(ePub3.RunLoop!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+No copy constructor
+</member>
+        <member name="M:ePub3.RunLoop.#ctor">
+
+Obtains the run loop for the current thread.
+</member>
+        <member name="M:ePub3.RunLoop.RunInternal(System.Boolean,std.chrono.duration&lt;System.Int64,std.ratio&lt;0x01,0x03b9aca00&gt;&gt;*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Internal Run function which takes an explicit timeout duration type.
+</member>
+        <member name="M:ePub3.RunLoop.WakeUp">
+
+Explicitly wake the RunLoop, causing it to check timers and event sources.
+</member>
+        <member name="M:ePub3.RunLoop.IsWaiting">
+
+Whether the RunLoop is currently waiting for an event or timer to fire.
+</member>
+        <member name="M:ePub3.RunLoop.Stop">
+
+Stops the RunLoop, exiting any invocations of Run() or Run(bool, std::chrono::duration).
+</member>
+        <member name="M:ePub3.RunLoop.Run">
+
+Runs the RunLoop forever, or until Stop() is called.
+</member>
+        <member name="M:ePub3.RunLoop.RemoveObserver(std.shared_ptr&lt;ePub3.RunLoop.Observer&gt;)">
+
+Removes an observer from this RunLoop (without cancelling it).
+</member>
+        <member name="M:ePub3.RunLoop.ContainsObserver(std.shared_ptr&lt;ePub3.RunLoop.Observer&gt;)">
+
+Whether an observer is registered on this runloop.
+</member>
+        <member name="M:ePub3.RunLoop.AddObserver(std.shared_ptr&lt;ePub3.RunLoop.Observer&gt;)">
+
+Adds an observer to the run loop.
+</member>
+        <member name="M:ePub3.RunLoop.RemoveEventSource(std.shared_ptr&lt;ePub3.RunLoop.EventSource&gt;)">
+
+Removes an event source from this RunLoop (without cancelling it).
+</member>
+        <member name="M:ePub3.RunLoop.ContainsEventSource(std.shared_ptr&lt;ePub3.RunLoop.EventSource&gt;)">
+
+Whether an event source is registered on this runloop.
+</member>
+        <member name="M:ePub3.RunLoop.AddEventSource(std.shared_ptr&lt;ePub3.RunLoop.EventSource&gt;)">
+
+Adds an event source to the run loop.
+</member>
+        <member name="M:ePub3.RunLoop.RemoveTimer(std.shared_ptr&lt;ePub3.RunLoop.Timer&gt;)">
+
+Removes the timer from this RunLoop (without cancelling it).
+</member>
+        <member name="M:ePub3.RunLoop.ContainsTimer(std.shared_ptr&lt;ePub3.RunLoop.Timer&gt;)">
+
+Whether a timer is registered on this runloop.
+</member>
+        <member name="M:ePub3.RunLoop.AddTimer(std.shared_ptr&lt;ePub3.RunLoop.Timer&gt;)">
+
+Adds a timer to the run loop.
+</member>
+        <member name="M:ePub3.RunLoop.PerformFunction(std.function&lt;(System.Void)&gt;)">
+
+Call a function on the run loop's assigned thread.
+</member>
+        <member name="M:ePub3.RunLoop.CurrentRunLoop">
+
+This is the only way to obtain a RunLoop. Use it wisely.
+</member>
+        <member name="M:ePub3.RunLoop.Timer.Repeats">
+
+Tests whether a timer is set to repeat.
+</member>
+        <member name="M:ePub3.RunLoop.Timer.IsCancelled">
+
+Tests whether a timer has been cancelled.
+</member>
+        <member name="M:ePub3.RunLoop.Timer.Cancel">
+
+Cancels the timer, causing it to never fire again.
+</member>
+        <member name="M:ePub3.RunLoop.Timer.op_Equality(ePub3.RunLoop.Timer!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Test for equality
+</member>
+        <member name="M:ePub3.RunLoop.Timer.op_Assign(ePub3.RunLoop.Timer*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move assignment
+</member>
+        <member name="M:ePub3.RunLoop.Timer.op_Assign(ePub3.RunLoop.Timer!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy assignment
+</member>
+        <member name="M:ePub3.RunLoop.Timer.#ctor(ePub3.RunLoop.Timer*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move constructor
+</member>
+        <member name="M:ePub3.RunLoop.Timer.#ctor(ePub3.RunLoop.Timer!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy constructor
+</member>
+        <member name="M:ePub3.RunLoop.Timer.#ctor">
+
+No default constructor.
+</member>
+        <member name="F:ePub3.RunLoop.Timer._timer">
+
+Timers always use the system clock.
+</member>
+        <member name="M:ePub3.RunLoop.EventSource.Signal">
+
+Signal the event source, causing it to fire on one of its associated RunLoops.
+</member>
+        <member name="M:ePub3.RunLoop.EventSource.Cancel">
+
+Cancel the event source, so it will never fire again.
+</member>
+        <member name="M:ePub3.RunLoop.EventSource.IsCancelled">
+
+Whether the event source has been cancelled.
+</member>
+        <member name="M:ePub3.RunLoop.EventSource.op_Equality(ePub3.RunLoop.EventSource!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Test for equality.
+</member>
+        <member name="M:ePub3.RunLoop.EventSource.op_Assign(ePub3.RunLoop.EventSource*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move assignment
+</member>
+        <member name="M:ePub3.RunLoop.EventSource.op_Assign(ePub3.RunLoop.EventSource!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy assignment
+</member>
+        <member name="M:ePub3.RunLoop.Observer.Cancel">
+
+Cancels the observer, causing it never to fire again.
+</member>
+        <member name="M:ePub3.RunLoop.Observer.IsCancelled">
+
+Whether the observer has been cancelled.
+</member>
+        <member name="M:ePub3.RunLoop.Observer.Repeats">
+
+Whether this observer will post multiple events.
+</member>
+        <member name="M:ePub3.RunLoop.Observer.GetActivities">
+
+Retrieves the activities monitored by this observer.
+</member>
+        <member name="M:ePub3.RunLoop.Observer.op_Equality(ePub3.RunLoop.Observer!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Test for equality with another observer
+</member>
+        <member name="M:ePub3.RunLoop.Observer.op_Assign(ePub3.RunLoop.Observer*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move assignment
+</member>
+        <member name="M:ePub3.RunLoop.Observer.#ctor(ePub3.RunLoop.Observer*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move constructor
+</member>
+        <member name="M:ePub3.RunLoop.Observer.#ctor(ePub3.RunLoop.Observer!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Copy constructor
+</member>
+        <member name="M:ePub3.RunLoop.Observer.#ctor(System.UInt32,System.Boolean,std.function&lt;(ePub3.RunLoop.Observer*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.UInt32)(ePub3.RunLoop.Observer*!System.Runtime.CompilerServices.IsImplicitlyDereferenced&amp;,System.UInt32)&gt;)">
+Creates a RunLoop observer.
+@param activities The ActivityFlags defining the activities to observe.
+@param repeats Whether the observer should fire more than once.
+@param fn The function to call when an observed activity occurs.
+
+</member>
+        <member name="D:ePub3.RunLoop.Observer.ObserverFn">
+
+The type of function invoked by an observer.
+</member>
+        <member name="T:ePub3.RunLoop.Observer.ActivityFlags">
+
+The different Activity flags.
+</member>
+        <member name="D:ePub3.RunLoop.Observer.Activity">
+
+A bitfield type, used to specify the activities to observe.
+</member>
+        <member name="P:Readium.ErrorHandling.Default">
+
+If you replace the default error handler, you can call this to either
+delegate some errors back to default handling, or to remove your handler
+(putting the default handler back in its place).
+</member>
+        <member name="M:ePub3.Package.SetValidatesSchema(System.Boolean)">
+
+Enable or disable OPF schema validation.
+</member>
+        <member name="M:ePub3.Package.ValidatesSchema">
+
+Whether the XML parser will validate an OPF file against its schema (default is `true`).
+</member>
+        <member name="M:ePub3.Package._CompileSpineItemTitlesInternal(std.vector&lt;std.shared_ptr&lt;ePub3.NavigationElement&gt;,std.allocator&lt;std.shared_ptr&lt;ePub3.NavigationElement&gt;&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.map&lt;ePub3.string,ePub3.string,std.less&lt;ePub3.string&gt;,std.allocator&lt;std.pair&lt;ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string&gt;&gt;&gt;*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Internal recursive function for navigating the TOC tree.
+</member>
+        <member name="M:ePub3.Package.CompileSpineItemTitles">
+
+Assigns titlues to SpineItems based on the contents of the TOC nav table.
+</member>
+        <member name="M:ePub3.Package.Unpack">
+@}
+
+Extracts information from the OPF XML document.
+</member>
+        <member name="M:ePub3.Package.SetFilterChain(std.shared_ptr&lt;ePub3.FilterChain&gt;)">
+Assigns a filter chain to this package.
+
+This is called automatically by Container at the end of its initialization. The
+public API here is available only for quite specific circumstances where the
+built-in chain creation is not enough.
+@param chain The filter chain for the receiving Package instance.
+
+</member>
+        <member name="M:ePub3.Package.SetMediaSupport(std.map&lt;ePub3.string,std.shared_ptr&lt;ePub3.MediaSupportInfo&gt;,std.less&lt;ePub3.string&gt;,std.allocator&lt;std.pair&lt;ePub3.string!System.Runtime.CompilerServices.IsConst,std.shared_ptr&lt;ePub3.MediaSupportInfo&gt;&gt;&gt;&gt;*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Sets the media support information for the package.
+@param list A list of MediaSupportInfo objects detailing support for each
+media type defined in the manifest. This may contain information for types not
+present in this package's manifest, for convenience.
+
+</member>
+        <member name="M:ePub3.Package.SetMediaSupport(std.map&lt;ePub3.string,std.shared_ptr&lt;ePub3.MediaSupportInfo&gt;,std.less&lt;ePub3.string&gt;,std.allocator&lt;std.pair&lt;ePub3.string!System.Runtime.CompilerServices.IsConst,std.shared_ptr&lt;ePub3.MediaSupportInfo&gt;&gt;&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Sets the media support information for the package.
+@param list A list of MediaSupportInfo objects detailing support for each
+media type defined in the manifest. This may contain information for types not
+present in this package's manifest, for convenience.
+
+</member>
+        <member name="M:ePub3.Package.MediaSupport">
+The package's current media support list.
+
+The package loading system will create this based on the known core types and
+any DHTML media handlers defined in the package itself.
+@result The package's media support information.
+
+
+The package's current media support list, supports editing in-place.
+
+The package loading system will create this based on the known core types and
+any DHTML media handlers defined in the package itself.
+@result The package's media support information.
+
+</member>
+        <member name="M:ePub3.Package.UnsupportedMediaTypes">
+
+Returns a list of all unsupported media types.
+</member>
+        <member name="M:ePub3.Package.AllMediaTypes">
+
+Returns a list of all media types seen in the manifest.
+</member>
+        <member name="M:ePub3.Package.OPFHandlerForMediaType(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Retrieves the handler that will be used for a certain media type.
+@param mediaType The media-type whose handler to retrieve.
+@result The handler for this media type.
+
+</member>
+        <member name="M:ePub3.Package.HandlersForMediaType(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Obtains all installed handlers for a particular media type.
+@param mediaType The media-type whose handler list to retrieve.
+@result A list of installed handlers for this media type.
+
+</member>
+        <member name="M:ePub3.Package.MediaTypesWithDHTMLHandlers">
+@}
+@{
+@name Media Handling
+
+A list of media types which have an installed handler of class MediaHandler.
+</member>
+        <member name="M:ePub3.Package.PageProgressionDirection">
+Retrieves the page progression direction for the publication.
+@result A PageProgressionDirection value.
+
+</member>
+        <member name="M:ePub3.Package.Subjects(System.Boolean)">
+Retrieves a list of the publication's subjects.
+@param localized Set to `true` (the default) to obtain localized values if
+available. The localization to use is determined by calling
+PackageBase::Locale().
+@result The publication's subjects.
+
+</member>
+        <member name="M:ePub3.Package.ISBN">
+Returns the publication's ISBN number, if available.
+@result An ISBN, or the empty string if none is specified.
+
+</member>
+        <member name="M:ePub3.Package.ModificationDate">
+Retrieves a string indicating the last modification date of this package.
+@result The package's modification date, if specified.
+
+</member>
+        <member name="M:ePub3.Package.CopyrightOwner(System.Boolean)">
+Retrieves the publication's copyright information.
+@param localized Set to `true` (the default) to obtain a localized value if
+one is available. The localization to use is determined by calling
+PackageBase::Locale().
+@result The publication's copyright ownership/assignment statement.
+
+</member>
+        <member name="M:ePub3.Package.Source(System.Boolean)">
+Retrieves the source of the publication, if available.
+@param localized Set to `true` (the default) to obtain a localized value if
+one is available. The localization to use is determined by calling
+PackageBase::Locale().
+@result The publication's original source.
+
+</member>
+        <member name="M:ePub3.Package.Language">
+Retrieves the language of the publication, if available.
+@result The publication's original language.
+
+</member>
+        <member name="M:ePub3.Package.Contributors(System.Boolean)">
+Retrieves a display-ready string listing all contributors.
+@param localized Set to `true` (the default) to obtain a localized value if
+one is available. The localization to use is determined by calling
+PackageBase::Locale().
+@result A list of contributors, collated and ready for display.
+
+</member>
+        <member name="M:ePub3.Package.ContributorNames(System.Boolean)">
+Retrieves a list of all contributors (authors, editors, committee members, etc.)
+@param localized Set to `true` (the default) to obtain localized values if
+available. The localization to use is determined by calling
+PackageBase::Locale().
+@result A list of contributors, each in display format.
+
+</member>
+        <member name="M:ePub3.Package.Authors(System.Boolean)">
+Retrieves a display-ready string listing all authors.
+@param localized Set to `true` (the default) to obtain a localized value if
+one is available. The localization to use is determined by calling
+PackageBase::Locale().
+@result A list of authors, collated and ready for display.
+
+</member>
+        <member name="M:ePub3.Package.AttributionNames(System.Boolean)">
+Retrieves the names of all authors/creators in sortable format.
+
+If a `file-as` refinement of an author/creator name is not available, that name
+will be returned in display format, i.e. the library will not attempt to
+synthesize a `file-as` value from the display name.
+@param localized Set to `true` (the default) to obtain localized values if
+available. The localization to use is determined by calling
+PackageBase::Locale().
+@result A list of authors, suitable for sorting.
+
+</member>
+        <member name="M:ePub3.Package.AuthorNames(System.Boolean)">
+Retrieves the names of all authors/creators credited for this publication.
+@param localized Set to `true` (the default) to obtain localized values if
+available. The localization to use is determined by calling
+PackageBase::Locale().
+@result A list of authors, each name suitable for display.
+
+</member>
+        <member name="D:ePub3.Package.AttributionList">
+
+A simple type which lists the names of a publication's creators.
+</member>
+        <member name="M:ePub3.Package.FullTitle(System.Boolean)">
+Retrieves the complete title of the publication.
+
+This will return the author-defined expanded title if available, otherwise it
+will construct a title from either:
+
+* All available titles ordered according to their 'display-seq' value.
+* All available titles in document order.
+@param localized Set to `true` (the default) to obtain a localized value if
+one is available. The localization to use is determined by calling
+PackageBase::Locale().
+@result The complete title of the publication.
+
+</member>
+        <member name="M:ePub3.Package.ExpandedTitle(System.Boolean)">
+Retrieves the expanded title of the publication.
+@param localized Set to `true` (the default) to obtain a localized value if
+one is available. The localization to use is determined by calling
+PackageBase::Locale().
+@result The expanded title of the publication.
+
+</member>
+        <member name="M:ePub3.Package.EditionTitle(System.Boolean)">
+Retrieves the edition title of the publication.
+@param localized Set to `true` (the default) to obtain a localized value if
+one is available. The localization to use is determined by calling
+PackageBase::Locale().
+@result The edition title of the publication.
+
+</member>
+        <member name="M:ePub3.Package.CollectionTitle(System.Boolean)">
+Retrieves the collection title of the publication.
+@param localized Set to `true` (the default) to obtain a localized value if
+one is available. The localization to use is determined by calling
+PackageBase::Locale().
+@result The collection title of the publication.
+
+</member>
+        <member name="M:ePub3.Package.ShortTitle(System.Boolean)">
+Retrieves the short-form title of the publication.
+@param localized Set to `true` (the default) to obtain a localized value if
+one is available. The localization to use is determined by calling
+PackageBase::Locale().
+@result The short-form title of the publication.
+
+</member>
+        <member name="M:ePub3.Package.Subtitle(System.Boolean)">
+Retrieves the subtitle of the publication.
+@param localized Set to `true` (the default) to obtain a localized value if
+one is available. The localization to use is determined by calling
+PackageBase::Locale().
+@result The subtitle of the publication.
+
+</member>
+        <member name="M:ePub3.Package.Title(System.Boolean)">
+@}
+@{
+@name High-Level Metadata API
+Retrieves the title of the publication.
+@param localized Set to `true` (the default) to obtain a localized value if
+one is available. The localization to use is determined by calling
+PackageBase::Locale().
+@result The title of the publication.
+
+</member>
+        <member name="M:ePub3.Package.PageList">
+
+Returns the page list, if any exists.
+</member>
+        <member name="M:ePub3.Package.ListOfTables">
+
+Returns the list of tables, if any exists.
+</member>
+        <member name="M:ePub3.Package.ListOfIllustrations">
+
+Returns the list of illustrations, if any exists.
+</member>
+        <member name="M:ePub3.Package.ListOfFigures">
+
+Return the list of figures, if any exists.
+</member>
+        <member name="M:ePub3.Package.TableOfContents">
+@}
+@{
+@name Navigation Tables
+
+Returns the table of contents for this package.
+</member>
+        <member name="M:ePub3.Package.ReaderForRelativePath(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+@}
+@{
+@name Raw Data Access
+</member>
+        <member name="M:ePub3.Package.op_Subscript(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Obtains the ManifestItem with a given identifier.
+@param ident The identifier of the ManifestItem to retrieve.
+@result The ManifestItem with the given identifier, or `nullptr` if no item
+had that identifier.
+
+</member>
+        <member name="M:ePub3.Package.op_Subscript(System.UInt32)">
+Obtains an element from the spine by index.
+@param idx The (zero-based) index of the spine item to retrieve.
+@result The SpineItem at the supplied index, or `nullptr` if the index was out
+of bounds.
+
+</member>
+        <member name="M:ePub3.Package.DocumentForCFI(ePub3.CFI*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.CFI*)">
+A convenience method used to obtain a libxml2 `xmlDocPtr` from a CFI.
+
+This method calls ManifestItemForCFI() internally, so will fix the input
+CFI based on any qualifiers.
+@param cfi The CFI whose corresponding ManifestItem to locate. This may be altered
+for correctness if its qualifiers do not match the target item.
+@param pRemainingCFI A pointer to a CFI instance whose value will be set to the
+fragment of `cfi` which refers to the content of the document referenced by
+the returned ManifestItem, i.e. a document-relative locator. If no fragment
+remains (`cfi` referred only to the top-level document) then it will be set
+to the empty CFI.
+@result An `xmlDocPtr` for the selected document, or `nullptr` upon failure.
+
+</member>
+        <member name="M:ePub3.Package.ManifestItemForCFI(ePub3.CFI*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.CFI*)">
+Obtains the ManifestItem referenced by a given CFI.
+
+This method will fix the input CFI if necessary/possible, based on any qualifiers
+included in the CFI.
+@param cfi The CFI whose corresponding ManifestItem to locate. This may be altered
+   for correctness if its qualifiers do not match the target item.
+@param pRemainingCFI A pointer to a CFI instance whose value will be set to the
+   fragment of `cfi` which refers to the content of the document referenced by
+   the returned ManifestItem, i.e. a document-relative locator. If no fragment
+   remains (`cfi` referred only to the top-level document) then it will be set
+   to the empty CFI.
+@result The ManifestItem corresponding to the input CFI, or `nullptr` otherwise.
+
+</member>
+        <member name="M:ePub3.Package.CFIForSpineItem(std.shared_ptr&lt;ePub3.SpineItem&gt;)">
+Creates a CFI which locates a given SpineItem.
+@param item A pointer to the SpineItem to locate.
+@result A new CFI, as specific as possible, for the input SpineItem.
+
+</member>
+        <member name="M:ePub3.Package.CFIForManifestItem(std.shared_ptr&lt;ePub3.ManifestItem&gt;)">
+Creates a CFI which locates a given ManifestItem.
+@param item A pointer to the ManifestItem to locate.
+@result A new CFI, as specific as possible, for the input ManifestItem.
+
+</member>
+        <member name="M:ePub3.Package.SpineItemWithIDRef(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+@}
+@{
+@name Spine, Manifest, and CFI
+Returns the SpineItem having a given IDRef.
+@param idref The IDRef for which to search.
+@result A pointer to the located SpineItem, or `nullptr` if none was found.
+
+</member>
+        <member name="M:ePub3.Package.AddMediaHandler(std.shared_ptr&lt;ePub3.ContentHandler&gt;)">
+Adds a new handler for a particular (foreign) media type.
+
+Assumes ownership of the input ContentHandler pointer.
+@param handler A ContentHandler instance.
+
+</member>
+        <member name="M:ePub3.Package.FireLoadEvent(ePub3.IRI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Fires a load-content event for a given URL, calling the handler passed to SetLoadHandler.
+@param url The URL of the item being loaded.
+
+</member>
+        <member name="M:ePub3.Package.SetLoadHandler(std.function&lt;(ePub3.IRI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)(ePub3.IRI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced&amp;)&gt;)">
+@{
+@name Event/Content Handlers
+Attaches a handler for load-content events.
+@param handler A function to be called with the URL of each item loaded.
+
+</member>
+        <member name="M:ePub3.Package.Version">
+
+OPF version of this package document.
+</member>
+        <member name="M:ePub3.Package.Type">
+
+MIME type of this package document (usually `application/oebps-package+xml`).
+</member>
+        <member name="M:ePub3.Package.PackageID">
+
+The package's unique-id on its own, without the revision modifier.
+</member>
+        <member name="M:ePub3.Package.URLSafeUniqueID">
+
+A version of the UniqueID which is suitable for use as a hostname.
+</member>
+        <member name="M:ePub3.Package.UniqueID">
+
+The full Unique Identifier, built from the package unique-id and the modification date.
+</member>
+        <member name="D:ePub3.Package.MediaSupportList">
+A list of media types (i.e. MIME types) used in the package's manifest.
+
+Each type is paired with an instance of MediaSupportInfo which describes the
+support for that media type.
+
+</member>
+        <member name="D:ePub3.Package.LoadEventHandler">
+Callback type for load events.
+
+The Package object just calls this function when a URL should be loaded-- the
+function should handle all the actual loading/display mechanism itself.
+@param url The url of the item to load.
+
+</member>
+        <member name="T:ePub3.Package">
+The Package class implements a high-level API for interacting with OPF packages,
+including convenience accessors for well-known metadata items.
+
+@remarks A Package instance holds owning references to all LoadEventHandlers and
+MediaSupportInfo objects attached to it.
+
+@see PackageBase for other important memory ownership information.
+
+@ingroup epub-model
+
+</member>
+        <member name="M:ePub3.PackageBase.NavTablesFromManifestItem(std.shared_ptr&lt;ePub3.PackageBase&gt;,std.shared_ptr&lt;ePub3.ManifestItem&gt;)">
+
+Loads navigation tables from a given manifest item (which has the `"nav"` property) or one referencing an NCX document.
+</member>
+        <member name="M:ePub3.PackageBase.ConfirmOrCorrectSpineItemQualifier(std.shared_ptr&lt;ePub3.SpineItem&gt;,ePub3.CFI.Component*)">
+Locates a spine item based on the corresponding CFI component.
+
+May update the supplied CFI component following target correction.
+
+</member>
+        <member name="M:ePub3.PackageBase.Unpack">
+
+Unpacks the _opf document. Implemented by the subclass, to make PackageBase pure-virtual.
+</member>
+        <member name="M:ePub3.PackageBase.ReadStreamForItemAtPath(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Returns a ByteStream for reading from the specified file in the package's Archive.
+@param path The path of the item to read.
+@result An auto-pointer to a new ByteStream instance.
+@ingroup utilities
+
+</member>
+        <member name="M:ePub3.PackageBase.NavigationTable(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+@}
+Returns a navigation table identified by type.
+@param type An `epub:type` attribute value, such as `"toc"` or `"lot"`.
+@result A pointer to the relevant navigation table, or `nullptr` if no such
+table was found.
+
+</member>
+        <member name="M:ePub3.PackageBase.ManifestItemAtRelativePath(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Get a ManifestItem corresponding to a package-relative path.
+@param path The package-relative path to the item whose ManifestItem to locate.
+@result A ManifestItem pointer, or `nullptr` if no manifest item matches the path.
+
+</member>
+        <member name="M:ePub3.PackageBase.CFISubpathForManifestItemWithID(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Generates the subpath part of a CFI used to locate a given manifest item.
+
+The subpath will contain the correct steps to locate the requested item through
+the spine.  This fragment will include an element qualifier, e.g.
+
+~~~{.cpp}
+string s = pkg.CFISubpathForManifestItemWithID("item1");
+// returns "/6/4[item1]!"
+~~~
+@param ident The unique identifier for the manifest item to locate.
+@result A string containing the part of an ePub3 CFI which leads to the
+*content* of the referenced item.  If the identified manifest item is not referenced by a spine item,
+an empty string will be returned.
+@remarks The CFI spec states that all items be accessed via the spine.  Is it
+allowed to have a CFI which directly references a manifest item in the case
+where it's not referenced by a spine item?
+
+</member>
+        <member name="M:ePub3.PackageBase.ManifestItemWithID(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+@}
+@{
+@name Manifest Item Accessors
+Looks up and returns a specific manifest item by its unique identifier.
+@param ident The unique identifier for the item to retrieve.
+@result A pointer to the requested item, or `nullptr` if no such item exists.
+
+</member>
+        <member name="M:ePub3.PackageBase.SpineItemAt(System.UInt32)">
+Locates a spine item by position.
+@param idx The zero-based position of the item to return.
+@result A pointer to the requested spine item, or `nullptr` if the index was
+out of bounds.
+
+</member>
+        <member name="M:ePub3.PackageBase.FirstSpineItem">
+@}
+@{
+@name Spine Accessors
+Returns the first item in the Spine.
+
+</member>
+        <member name="M:ePub3.PackageBase.NavigationTables">
+
+Returns an immutable reference to the map of navigation tables.
+</member>
+        <member name="M:ePub3.PackageBase.Manifest">
+@{
+@name Raw Table Accessors
+
+Returns an immutable reference to the manifest table.
+</member>
+        <member name="M:ePub3.PackageBase.Open(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Parses the contents of the package at the given location.
+@param path The container-relative path to the XML OPF file.
+@result Returns `true` if the package was parsed successfully, `false` otherwise.
+
+</member>
+        <member name="M:ePub3.PackageBase.#ctor(ePub3.PackageBase*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+C++11 'move' constructor-- claims ownership of its argument's internals. 
+</member>
+        <member name="M:ePub3.PackageBase.#ctor(std.shared_ptr&lt;ePub3.Container&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Constructs a new PackageBase object.
+
+The type, at present, is assumed to be `application/oebps-package+xml`; the
+parameter is here for future-proofing in case of alternative package types in
+later standards.
+@param owner The Container which owns this object.
+@param type The MIME type of the document, as read from the OCF `root-file`
+element.
+
+</member>
+        <member name="M:ePub3.PackageBase.#ctor(ePub3.PackageBase!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+There is no copy constructor for PackageBase. 
+</member>
+        <member name="M:ePub3.PackageBase.#ctor">
+There is no default constructor for PackageBase. 
+</member>
+        <member name="D:ePub3.PackageBase.XMLIDLookup">
+
+An XML-ID lookup table for relevant types
+</member>
+        <member name="D:ePub3.PackageBase.PropertyIRIList">
+
+A list of property IRIs.
+</member>
+        <member name="D:ePub3.PackageBase.ContentHandlerMap">
+
+A map of media-type to content-handler lists.
+</member>
+        <member name="D:ePub3.PackageBase.ContentHandlerList">
+
+An array of content handler objects.
+</member>
+        <member name="D:ePub3.PackageBase.NavigationMap">
+
+A lookup table for navigation tables, indexed by type.
+</member>
+        <member name="T:ePub3.PackageBase">
+The PackageBase class implements the low-level components and all storage of an OPF
+package document.  It provides direct access to spine, manifest, and metadata tables,
+while the Package class provides a higher-level API on top of these.
+
+@remarks The PackageBase class holds owning references for all Metadata, ContentHandlers,
+top-level NavigationTables, and ManifestItems. It also holds an owning reference to
+the first SpineItem in its spine; each SpineItem holds an owning reference to the
+SpineItem that follows it. Lastly, it a reference to the XML document for its
+source OPF file.
+
+@ingroup epub-model
+
+</member>
+        <member name="F:ePub3.ObjectPreprocessor._handlers">
+
+The object keeps its own list of handlers, used to create target URIs.
+</member>
+        <member name="M:ePub3.ObjectPreprocessor.FilterData(ePub3.FilterContext*,System.Void*,System.UInt32,System.UInt32*)">
+Performs the static replacement of `object` tags whose `type` attribute
+identifies a media-type for which the Publication provides a media handler.
+
+The entire `object` element will be replaced wholesale with two elements: an
+`iframe` containing the handler and a `form` containing a `button` element
+which will open the handler full-screen.  The `iframe` will be sandboxed, and
+will look similar to the following:
+
+    <iframe src="src.xml" srcdoc="src.xml" id="some_id" sandbox="allow-forms allow-scripts allow-same-origin" seamless="seamless" />
+
+Note that the XHTML vocabulary of HTML5 is used, and that both a `srcdoc`
+attribute for HTML5 and a `src` for older renderers is included.
+
+If the source `object` tag has an `id` attribute, that id will be attached to
+the new `iframe` element.  Additionally, the id will be suffixed with `-form`
+and `-button` and applied to the `form` and `button` elements respectively.  It
+is our intention that these rules will make it possible for content authors to
+anticipate these substitutions and build CSS or JavaScript rules directly.
+
+</member>
+        <member name="M:ePub3.ObjectPreprocessor.RequiresCompleteData">
+
+This preprocessor requires access to the entire content document at once.
+</member>
+        <member name="M:ePub3.ObjectPreprocessor.Dispose">
+
+Destructor.
+</member>
+        <member name="M:ePub3.ObjectPreprocessor.#ctor(ePub3.ObjectPreprocessor*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+C++11 'move' constructor.
+</member>
+        <member name="M:ePub3.ObjectPreprocessor.#ctor(ePub3.ObjectPreprocessor!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Standard copy constructor.
+</member>
+        <member name="M:ePub3.ObjectPreprocessor.#ctor(std.shared_ptr&lt;ePub3.Package!System.Runtime.CompilerServices.IsConst&gt;,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+Initializes a preprocessor and associates it with a Package object, from which
+it can obtain foreign media handler details.
+@param pkg The package to which this filter will apply.
+
+</member>
+        <member name="M:ePub3.ObjectPreprocessor.#ctor">
+
+No default constructor.
+</member>
+        <member name="M:ePub3.ObjectPreprocessor.ObjectFilterFactory(std.shared_ptr&lt;ePub3.Package!System.Runtime.CompilerServices.IsConst&gt;)">
+The factory routine
+</member>
+        <member name="M:ePub3.ObjectPreprocessor.ShouldApply(std.shared_ptr&lt;ePub3.ManifestItem!System.Runtime.CompilerServices.IsConst&gt;)">
+
+Matches only mnifest items with a media-type of "application/xhtml+xml" or "text/html".
+</member>
+        <member name="T:ePub3.ObjectPreprocessor">
+Implements a filter for reading content documents which statically replaces `object`
+elements with `iframe` elements referencing the appropriate DHTML handler.
+@ingroup filters
+
+</member>
+        <member name="M:ePub3.AsyncZipFileByteStream.Clone">
+	Creates a new independent stream object referring to the same file.
+
+	The returned stream is already open with the same privileges as the receiver.
+	@result A new FileByteStream instance.
+
+</member>
+        <member name="M:ePub3.AsyncZipFileByteStream.Close">
+
+@copydoc ByteStream::Close()
+</member>
+        <member name="M:ePub3.AsyncZipFileByteStream.Open(zip*,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32)">
+
+@copydoc ZipFileByteStream::Open()
+</member>
+        <member name="M:ePub3.AsyncZipFileByteStream.WriteBytes(System.Void!System.Runtime.CompilerServices.IsConst*,System.UInt32)">
+
+@copydoc AsyncByteStream::WriteBytes()
+</member>
+        <member name="M:ePub3.AsyncZipFileByteStream.ReadBytes(System.Void*,System.UInt32)">
+
+@copydoc AsyncByteStream::ReadBytes()
+</member>
+        <member name="M:ePub3.AsyncZipFileByteStream.IsOpen">
+
+@copydoc FileByteStream::IsOpen()
+</member>
+        <member name="M:ePub3.AsyncZipFileByteStream.SpaceAvailable">
+
+@copydoc AsyncByteStream::SpaceAvailable
+</member>
+        <member name="M:ePub3.AsyncZipFileByteStream.BytesAvailable">
+
+@copydoc AsyncByteStream::BytesAvailable
+</member>
+        <member name="M:ePub3.AsyncZipFileByteStream.#ctor(std.function&lt;(&lt;unknown type&gt;,ePub3.AsyncByteStream*)(&lt;unknown type&gt;,ePub3.AsyncByteStream**)&gt;)">
+
+@copydoc AsyncFileByteStream::AsyncFileByteStream(StreamEventHandler)
+</member>
+        <member name="M:ePub3.AsyncZipFileByteStream.#ctor(zip*,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32)">
+
+Create a new opened stream with no default handler.
+</member>
+        <member name="M:ePub3.AsyncZipFileByteStream.#ctor">
+
+Create a new unattached stream.
+</member>
+        <member name="T:ePub3.AsyncZipFileByteStream">
+A concrete AsyncByteStream subclass providing access to a file within a Zip archive.
+@ingroup utilities
+
+</member>
+        <member name="M:ePub3.AsyncFileByteStream.Clone">
+	Creates a new independent stream object referring to the same file.
+
+	The returned stream is already open with the same privileges as the receiver.
+	@result A new FileByteStream instance.
+
+</member>
+        <member name="M:ePub3.AsyncFileByteStream.Close">
+
+@copydoc FileByteStream::Close()
+</member>
+        <member name="M:ePub3.AsyncFileByteStream.Open(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32)">
+
+@copydoc FileByteStream::Open()
+</member>
+        <member name="M:ePub3.AsyncFileByteStream.WriteBytes(System.Void!System.Runtime.CompilerServices.IsConst*,System.UInt32)">
+
+@copydoc AsyncByteStream::WriteBytes()
+</member>
+        <member name="M:ePub3.AsyncFileByteStream.ReadBytes(System.Void*,System.UInt32)">
+
+@copydoc AsyncByteStream::ReadBytes()
+</member>
+        <member name="M:ePub3.AsyncFileByteStream.IsOpen">
+
+@copydoc FileByteStream::IsOpen()
+</member>
+        <member name="M:ePub3.AsyncFileByteStream.SpaceAvailable">
+
+@copydoc AsyncByteStream::SpaceAvailable
+</member>
+        <member name="M:ePub3.AsyncFileByteStream.BytesAvailable">
+
+@copydoc AsyncByteStream::BytesAvailable
+</member>
+        <member name="M:ePub3.AsyncFileByteStream.#ctor(std.function&lt;(&lt;unknown type&gt;,ePub3.AsyncByteStream*)(&lt;unknown type&gt;,ePub3.AsyncByteStream**)&gt;,System.UInt32)">
+
+Create a new unattached stream with a given event-handler.
+@see AsyncByteStream::AsyncByteStream(StreamEventHandler,size_type)
+</member>
+        <member name="M:ePub3.AsyncFileByteStream.#ctor(System.UInt32)">
+
+Create a new unattached stream.
+
+Create a new stream attached to a filesystem resource and no event handler.
+</member>
+        <member name="T:ePub3.AsyncFileByteStream">
+A concrete AsyncByteStream subclass providing access to a filesystem resource.
+@ingroup utilities
+
+</member>
+        <member name="M:ePub3.ZipFileByteStream.Clone">
+	Creates a new independent stream object referring to the same file.
+
+	The returned stream is already open with the same privileges as the receiver.
+	@result A new FileByteStream instance.
+
+</member>
+        <member name="M:ePub3.ZipFileByteStream.Position">
+Returns the current position within the target file.
+@result The current file position.
+
+</member>
+        <member name="M:ePub3.ZipFileByteStream.Seek(System.UInt32,System.Int32)">
+     Seek to a position within the target file.
+     @param by The amount to move the file position.
+     @param dir The starting point for the position calculation: current position,
+     start of file, or end of file.
+	 @result The new file position. This may be different from the requested position,
+	 if for instance the file was not large enough to accomodate the request.
+
+</member>
+        <member name="M:ePub3.ZipFileByteStream.WriteBytes(System.Void!System.Runtime.CompilerServices.IsConst*,System.UInt32)">
+
+@copydoc ByteStream::WriteBytes()
+</member>
+        <member name="M:ePub3.ZipFileByteStream.ReadBytes(System.Void*,System.UInt32)">
+
+@copydoc ByteStream::ReadBytes()
+</member>
+        <member name="M:ePub3.ZipFileByteStream.Close">
+
+@copydoc ByteStream::Close()
+</member>
+        <member name="M:ePub3.ZipFileByteStream.Open(zip*,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32)">
+Opens a file within an archive and attaches the stream.
+@param archive The Zip arrchive containing the target file.
+@param pathToOpen The path within the archive of the resource to open.
+@param zipFlags Flags such as whether to read the raw compressed data.
+@result Returns `true` if the file opened successfully, `false` otherwise.
+
+</member>
+        <member name="M:ePub3.ZipFileByteStream.IsOpen">
+
+@copydoc ByteStream::IsOpen()
+</member>
+        <member name="M:ePub3.ZipFileByteStream.SpaceAvailable">
+
+@copydoc ByteStream::SpaceAvailable
+</member>
+        <member name="M:ePub3.ZipFileByteStream.BytesAvailable">
+
+@copydoc ByteStream::BytesAvailable()
+</member>
+        <member name="M:ePub3.ZipFileByteStream.#ctor(zip*,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32)">
+Create a new stream to a file within a zip archive.
+@param archive The Zip arrchive containing the target file.
+@param pathToOpen The path within the archive of the resource to open.
+@param zipFlags Flags such as whether to read the raw compressed data.
+
+</member>
+        <member name="M:ePub3.ZipFileByteStream.#ctor">
+
+Create a new unattached stream.
+</member>
+        <member name="T:ePub3.ZipFileByteStream">
+A concrete ByteStream providing access to a file within a Zip archive.
+@ingroup utilities
+
+</member>
+        <member name="M:ePub3.FileByteStream.Clone">
+	 Creates a new independent stream object referring to the same file.
+
+	 The returned stream is already open with the same privileges as the receiver.
+	 @result A new FileByteStream instance.
+
+</member>
+        <member name="M:ePub3.FileByteStream.Flush">
+Ensures that all written data is pushed to permanent storage.
+
+</member>
+        <member name="M:ePub3.FileByteStream.Position">
+Returns the current position within the target file.
+@result The current file position.
+
+</member>
+        <member name="M:ePub3.FileByteStream.Seek(System.UInt32,System.Int32)">
+     Seek to a position within the target file.
+     @param by The amount to move the file position.
+     @param dir The starting point for the position calculation: current position,
+     start of file, or end of file.
+	 @result The new file position. This may be different from the requested position,
+	 if for instance the file was not large enough to accomodate the request.
+
+</member>
+        <member name="M:ePub3.FileByteStream.WriteBytes(System.Void!System.Runtime.CompilerServices.IsConst*,System.UInt32)">
+
+@copydoc ByteStream::WriteBytes()
+</member>
+        <member name="M:ePub3.FileByteStream.ReadBytes(System.Void*,System.UInt32)">
+
+@copydoc ByteStream::ReadBytes()
+</member>
+        <member name="M:ePub3.FileByteStream.Close">
+
+@copydoc ByteStream::Close()
+</member>
+        <member name="M:ePub3.FileByteStream.Open(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32)">
+Opens the stream for reading and/or writing a file at a given path.
+@param path The filesystem path to the file to access.
+@param mode Whether to open with read and/or write access. The default is to
+open for both reading and writing.
+@result Returns `true` if the file opened successfully, `false` otherwise.
+
+</member>
+        <member name="M:ePub3.FileByteStream.IsOpen">
+
+@copydoc ByteStream::IsOpen()
+</member>
+        <member name="M:ePub3.FileByteStream.SpaceAvailable">
+
+@copydoc ByteStream::SpaceAvailable()
+</member>
+        <member name="M:ePub3.FileByteStream.BytesAvailable">
+
+@copydoc ByteStream::BytesAvailable()
+</member>
+        <member name="M:ePub3.FileByteStream.#ctor(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32)">
+Create a new stream to a given file and open it for reading and/or writing.
+@param pathToOpen The path to the file to open.
+@param mode Whether to open with read and/or write access. Default is to open
+for both reading and writing.
+
+</member>
+        <member name="M:ePub3.FileByteStream.#ctor">
+
+Create a new stream unassociated with any file.
+</member>
+        <member name="T:ePub3.FileByteStream">
+A concrete ByteStream providing synchronous access to a resource on a filesystem.
+@ingroup utilities
+
+</member>
+        <member name="M:ePub3.SeekableByteStream.Clone">
+	Creates a new independent stream object referring to the same file.
+
+	The returned stream is already open with the same privileges as the receiver.
+	@result A new FileByteStream instance.
+
+</member>
+        <member name="M:ePub3.SeekableByteStream.Flush">
+Ensures that all written data is pushed to permanent storage.
+
+</member>
+        <member name="M:ePub3.SeekableByteStream.Position">
+Returns the current position within the target file.
+@result The current file position.
+
+</member>
+        <member name="M:ePub3.SeekableByteStream.Seek(System.UInt32,System.Int32)">
+Seek to a position within the target file.
+@param by The amount to move the file position.
+@param dir The starting point for the position calculation: current position,
+start of file, or end of file.
+@result The new file position. This may be different from the requested position,
+if for instance the file was not large enough to accomodate the request.
+
+</member>
+        <member name="T:ePub3.SeekableByteStream">
+ An abstract ByteStream subclass representing (potentially limited) random-access capability.
+
+ This is largely here for WinRT wrapper assistance.
+
+</member>
+        <member name="M:ePub3.AsyncPipe.Open(System.Int32)">
+
+This is not callable by those on the outside...
+</member>
+        <member name="M:ePub3.AsyncPipe.LinkedPair(System.UInt32)">
+
+Create a pair of linked pipes. Writes to one will be available to read on the other.
+</member>
+        <member name="T:ePub3.AsyncPipe">
+A concrete AsyncByteStream subclass, providing a Unix-like bidirectional pipe.
+
+Pipes are created only through the Pair() static function. This returns a pair of
+streams which share their buffers, in reverse order. In other words, stream A's
+read-buffer is also stream B's write-buffer, and vice versa.
+@ingroup utilities
+
+</member>
+        <member name="M:ePub3.AsyncByteStream.ReadyToRun">
+
+Used to prod the event source for this stream into action (if appropriate) when
+the stream is assigned to a runloop.
+</member>
+        <member name="M:ePub3.AsyncByteStream.write_for_async(System.Void!System.Runtime.CompilerServices.IsConst*,System.UInt32)">
+
+Implemented by subclasses to synchronously write data to the underlying resource.
+@see ByteStream::WriteBytes(const void*, size_type)
+</member>
+        <member name="M:ePub3.AsyncByteStream.read_for_async(System.Void*,System.UInt32)">
+
+Implemented by subclasses to synchronously read data from the underlying resource.
+@see ByteStream::ReadBytes(void*, size_type)
+</member>
+        <member name="M:ePub3.AsyncByteStream.EventDispatchSource">
+
+Subclasses can implement this to return an event-dispatch source.
+</member>
+        <member name="M:ePub3.AsyncByteStream.AsyncEventSource">
+
+Subclasses can override this to return their own EventSource. AsyncByteStream's
+implementation uses read_for_async() and write_for_async().
+</member>
+        <member name="M:ePub3.AsyncByteStream.InitAsyncHandler">
+
+Called by subclasses to initialize the asynchronous event handler and RunLoop.
+@throw std::logic_error if this stream has already set up its RunLoop::EventSource.
+</member>
+        <member name="M:ePub3.AsyncByteStream.WriteBytes(System.Void!System.Runtime.CompilerServices.IsConst*,System.UInt32)">
+@copydoc ByteStream::ReadBytes()
+All writes go to the async stream's write buffer, and will be written from
+there to the underlying resource asynchronously.
+
+</member>
+        <member name="M:ePub3.AsyncByteStream.ReadBytes(System.Void*,System.UInt32)">
+@copydoc ByteStream::ReadBytes()
+All reads are serviced from the async stream's read buffer, which is filled
+asynchronously from the underlying resource.
+
+</member>
+        <member name="M:ePub3.AsyncByteStream.Close">
+
+@copydoc ByteStream::Close()
+</member>
+        <member name="M:ePub3.AsyncByteStream.Open(System.Int32)">
+Initializes the input/output buffers of the stream.
+
+Subclasses *must* call this as part of their stream opening sequence to
+initialize the required stream resources.
+@param mode Only `std::ios::in` and `std::ios::out` are supported. This flag
+controls the creation of the read/write buffers; the default is to create a
+bidirectional stream with both input and output buffers.
+
+</member>
+        <member name="M:ePub3.AsyncByteStream.SpaceAvailable">
+
+@copydoc ByteStream::BytesAvailable()
+</member>
+        <member name="M:ePub3.AsyncByteStream.BytesAvailable">
+
+@copydoc ByteStream::BytesAvailable()
+</member>
+        <member name="M:ePub3.AsyncByteStream.SetScheduledHandler(std.function&lt;(std.shared_ptr&lt;ePub3.RunLoop&gt;,ePub3.AsyncByteStream*)(std.shared_ptr&lt;ePub3.RunLoop&gt;,ePub3.AsyncByteStream**)&gt;)">
+
+Assign a handler function to be called when the stream is scheduled on a runloop.
+</member>
+        <member name="M:ePub3.AsyncByteStream.GetScheduledHandler">
+
+Retrieve the runloop-assignment callback.
+</member>
+        <member name="M:ePub3.AsyncByteStream.SetTargetRunLoop(std.shared_ptr&lt;ePub3.RunLoop&gt;)">
+
+Assign a RunLoop on which to invoke the event-handler.
+</member>
+        <member name="M:ePub3.AsyncByteStream.EventTargetRunLoop">
+Retrieve the RunLoop on which the event-handler will be invoked.
+
+If no RunLoop has been assigned, the event-handler will be invoked from the
+shared I/O thread directly.
+
+</member>
+        <member name="M:ePub3.AsyncByteStream.WaitNextEvent(std.chrono.duration&lt;System.Double,std.ratio&lt;0x01,0x01&gt;&gt;)">
+
+Synchronously wait for an event to occur.
+</member>
+        <member name="M:ePub3.AsyncByteStream.SetEventHandler(std.function&lt;(&lt;unknown type&gt;,ePub3.AsyncByteStream*)(&lt;unknown type&gt;,ePub3.AsyncByteStream**)&gt;)">
+
+Assign an event-handler to an asynchronous stream.
+</member>
+        <member name="M:ePub3.AsyncByteStream.GetEventHandler">
+
+Retrieve the stream's event-handler function.
+</member>
+        <member name="M:ePub3.AsyncByteStream.#ctor(std.function&lt;(&lt;unknown type&gt;,ePub3.AsyncByteStream*)(&lt;unknown type&gt;,ePub3.AsyncByteStream**)&gt;,System.UInt32)">
+Create a new AsyncByteStream with an event handler.
+@param handler The event-handling function to call when the stream's status changes.
+@param bufsize The size, in bytes, of the read/write buffers. The default is 4KiB.
+
+</member>
+        <member name="M:ePub3.AsyncByteStream.#ctor(System.UInt32)">
+Create a new AsyncByteStream.
+@param bufsize The size, in bytes, of the read/write buffers. The default is 4KiB.
+
+</member>
+        <member name="D:ePub3.AsyncByteStream.StreamScheduledHandler">
+
+The type of a callback used to notify assignment to a runloop.
+</member>
+        <member name="D:ePub3.AsyncByteStream.timeout_type">
+
+Timeouts are expressed as seconds in floating-point (as in OS X/iOS)
+</member>
+        <member name="F:ePub3.AsyncByteStream.Exceptional">
+
+An exceptional circumstance has occurred (EOF, error)
+</member>
+        <member name="F:ePub3.AsyncByteStream.DataToWrite">
+
+Data has been written to the stream and can be written to the resource now.
+</member>
+        <member name="F:ePub3.AsyncByteStream.ReadSpaceAvailable">
+
+Space is available in the stream's RingBuffer to receive resource data.
+</member>
+        <member name="F:ePub3.AsyncByteStream.Wait">
+
+Take no action: wait for a different event.
+</member>
+        <member name="D:ePub3.AsyncByteStream.ThreadEvent">
+
+Internal event type-- used to signal the shared I/O thread.
+</member>
+        <member name="T:ePub3.AsyncByteStream">
+A simple asynchronous stream class.
+
+This class spawns a single shared thread on which reads and writes are issued. Each
+async stream uses a RunLoop::EventSource to notify the shared thread when the
+stream's ReadBytes() or WriteBytes() methods have been called. Similarly, a stream
+may be given a RunLoop on which to fire events advertising the availablility of
+either data to read or space to write.
+@ingroup utilities
+
+</member>
+        <member name="T:ePub3.InvalidDuplexStreamOperationError">
+An exception posted when a non-duplex stream is used in the wrong direction.
+
+</member>
+        <member name="T:ePub3.AsyncEvent">
+Event codes for asynchronous stream events.
+@ingroup utilities
+
+</member>
+        <member name="M:ePub3.ByteStream.Error">
+
+Returns any error code reported by the underlying system.
+</member>
+        <member name="M:ePub3.ByteStream.AtEnd">
+
+Returns `true` if an EOF status has occurred.
+</member>
+        <member name="M:ePub3.ByteStream.WriteBytes(System.Void!System.Runtime.CompilerServices.IsConst*,System.UInt32)">
+Write some data to the stream.
+@param buf A buffer containing data to write.
+@param len The number of bytes to send.
+@result Returns the number of bytes actually written to the stream.
+
+</member>
+        <member name="M:ePub3.ByteStream.ReadBytes(System.Void*,System.UInt32)">
+Read some data from the stream.
+@param buf A buffer into which to place any retrieved data.
+@param len The number of bytes that can be stored in `buf`.
+@result Returns the number of bytes actually copied into `buf`.
+
+</member>
+        <member name="M:ePub3.ByteStream.Close">
+
+Close the stream.
+</member>
+        <member name="M:ePub3.ByteStream.IsOpen">
+Determine whether the stream is currently open (i.e. usable).
+
+I can't define an Open() method on ByteStream here because that would require
+implementation-specific parameters.
+
+</member>
+        <member name="M:ePub3.ByteStream.SpaceAvailable">
+
+Returns the amount of space available for writing at this time.
+</member>
+        <member name="M:ePub3.ByteStream.BytesAvailable">
+
+Returns the number of bytes that can be read at this time.
+</member>
+        <member name="M:ePub3.ByteStream.#ctor(ePub3.ByteStream!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+ByteStreams cannot be copied, moved, or assigned.
+</member>
+        <member name="F:ePub3.ByteStream.UnknownSize">
+
+A value to be returned when a real count is not possible.
+</member>
+        <member name="D:ePub3.ByteStream.size_type">
+
+The type for all byte-counts used with the ByteStream API.
+</member>
+        <member name="T:ePub3.ByteStream">
+The abstract base class for all stream and pipe objects used by the Readium SDK.
+
+This class declares the standard interface for a stream-- that is, an object to
+which bytes can be sent and from which bytes can be read. By itself, a stream is
+not considered to be seekable, and has no concept of position. Subclasses are free
+to add that where applicable, however.
+
+This class does not define any interface for asynchronous I/O; that is the purview
+of the AsyncByteStream class, which inherits this one.
+
+@ingroup utilities
+
+</member>
+        <member name="M:ePub3.ZipArchive.Sanitized(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Sanitizes a path string, since `libzip` can be finnicky about them.
+</member>
+        <member name="M:ePub3.ZipArchive.op_Assign(ePub3.ZipArchive*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Move assignment.
+</member>
+        <member name="M:ePub3.ZipArchive.#ctor(zip*)">
+
+Initialize directly from a `libzip` internal structure.
+</member>
+        <member name="M:ePub3.ZipArchive.#ctor(ePub3.ZipArchive*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+move constructos.
+</member>
+        <member name="M:ePub3.ZipArchive.#ctor(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+
+Opens the ZipArchive at a given filesystem path.
+</member>
+        <member name="T:ePub3.ZipArchive">
+An Archive implementation for ZIP files, as used by the OCF 3.0 standard.
+
+@note ZIP archives do not contain any access permission information.
+@note The underlying implementation, `libzip`, writes data only when the archive
+is closed. Any data written to a zip file will therefore be kept in temporary
+storage until the archive object is closed.
+@see http://www.idpf.org/epub/30/spec/epub30-ocf.html#physical-container-zip
+@ingroup archives
+
+</member>
+        <member name="T:ePub3.Library">
+@ingroup utilities
+
+</member>
+        <member name="T:Readium.MediaSupportType">
+Possible types of support provided.
+</member>
+        <member name="F:Readium.MediaSupportType.SupportedWithHandler">
+The publication provides a DHTML handler for this media type.
+</member>
+        <member name="F:Readium.MediaSupportType.IntrinsicSupport">
+The rendering engine understands this media type with no outside help.
+</member>
+        <member name="F:Readium.MediaSupportType.Unsupported">
+The media type is not supported.
+</member>
+        <member name="T:Readium.PageProgression">
+Enumeration for page progression directions.
+</member>
+        <member name="F:Readium.PageProgression.LeftToRight">
+Pages flow from left to right, as in English.
+</member>
+        <member name="F:Readium.PageProgression.Default">
+Assume based on language, etc.
+</member>
+        <member name="T:Readium.PageSpread">
+Enumeration for page spreads.
+</member>
+        <member name="F:Readium.PageSpread.Right">
+This is the right page of a spread.
+</member>
+        <member name="F:Readium.PageSpread.Left">
+This is the left page of a spread.
+</member>
+        <member name="F:Readium.PageSpread.Automatic">
+No value specified by the author.
+</member>
+        <member name="T:Readium.DCType">
+Enumerated constants for the DCMES metadata attributes used by EPUB 3.
+</member>
+        <member name="F:Readium.DCType.Custom">
+A non-DCMES metadata value, identified only by its property IRI.
+</member>
+        <member name="F:Readium.DCType.Type">
+The type of content encoded in this publication, e.g. book, annotations, minutes, etc.
+</member>
+        <member name="F:Readium.DCType.Subject">
+The topic or topics which form the subject of the publication.
+</member>
+        <member name="F:Readium.DCType.Source">
+An identifier for the source of this EPUB, e.g. the ISBN of an original print edition.
+</member>
+        <member name="F:Readium.DCType.Rights">
+Information about rights associated with the publication.
+</member>
+        <member name="F:Readium.DCType.Relation">
+An identifier for a related resource.
+</member>
+        <member name="F:Readium.DCType.Publisher">
+Details of the publisher of the work.
+</member>
+        <member name="F:Readium.DCType.Format">
+Information on the format in which the publication is rendered.
+</member>
+        <member name="F:Readium.DCType.Description">
+A description of the publication's contents.
+</member>
+        <member name="F:Readium.DCType.Date">
+The original publication date (*not* the modification date).
+</member>
+        <member name="F:Readium.DCType.Creator">
+The name of a primary creator.
+</member>
+        <member name="F:Readium.DCType.Coverage">
+Spatial or temporal context of the publication.
+</member>
+        <member name="F:Readium.DCType.Contributor">
+The name of a secondary contributor.
+</member>
+        <member name="F:Readium.DCType.Language">
+The language in which the publication is rendered.
+</member>
+        <member name="F:Readium.DCType.Title">
+The title of the publication.
+</member>
+        <member name="F:Readium.DCType.Identifier">
+A unique identifier.
+</member>
+        <member name="F:Readium.DCType.Invalid">
+An invalid value.
+</member>
+        <member name="P:Readium.Container.Creator">
+            <summary>
+		Gets/sets the ContentModule which created this container, if any.
+
+		Note that a Creator may only be set once. Any attempt to set another Creator will raise an exception.
+	</summary>
+        </member>
+        <member name="M:Readium.Container.ReadStreamAtPath(System.String)">
+            <summary>
+	Obtains a pointer to a ReadStream for a specific file within the container.
+</summary>
+            <param name="path">
+	A container-relative path to the file whose data to read.
+</param>
+            <result>
+	A stream to the specified file.
+</result>
+        </member>
+        <member name="M:Readium.Container.EncryptionInfoForPath(System.String)">
+            <summary>
+	Retrieves the encryption information for a specific file within the container.
+</summary>
+            <param name="path">
+	A container-relative path to the item whose encryption information to retrieve.
+</param>
+            <result>
+	Returns the encryption information, or <c>nullptr</c> if none was found.
+</result>
+        </member>
+        <member name="M:Readium.Container.EncryptionData">
+All information from META-INF/encryption.xml
+</member>
+        <member name="M:Readium.Container.Version">
+The version number of this container's data.
+</member>
+        <member name="M:Readium.Container.DefaultPackage">
+The default (first in the list) package instance
+</member>
+        <member name="M:Readium.Container.Packages">
+All instantiated packages
+</member>
+        <member name="M:Readium.Container.PackageLocations">
+ePub-relative paths for all packages
+</member>
+        <member name="M:Readium.Library.LoadLibrary(Windows.Storage.IStorageFile)">
+Returns the singleton Library instance by loadin from a saved file.
+<param name="savedLibrary">A file generated by WriteToFile().</param><returns>The single Library instance for this application.</returns></member>
+        <member name="M:Readium.Library.MainLibrary">
+Creates or returns the singleton Library instance.
+</member>
+        <member name="M:Readium.Library.#ctor(ePub3.Library*)">
+Creates a library object from a native Library.
+</member>
+        <member name="T:Readium.Library">
+            <summary>
+                <para>
+This is a library in the smallest sense: it keeps track of ePub files
+by their unique-identifier, storing the path to that ePub file *as given*. Its
+primary presence here is to allow for inter-publication linking. It is also
+designed to be subclassed in order to serve as the basis of a complete library
+in an application, with all the additional functionality that would involve.
+</para>
+                <para>
+Note that each application would have a single library, accessible only through
+the MainLibrary() static method. A library can optionally be written out to
+disk and then loaded back in by calling MainLibrary() with a Locator instance
+at application startup. Once the singleton instance has been created,
+MainLibrary() will ignore its argument and always return that instance.
+</para>
+            </summary>
+            <remarks>
+Thoughts: OCF allows for multiple packages to be specified, but I don't see any
+handling of that in ePub3 CFI?
+</remarks>
+        </member>
+        <member name="D:ssize_t">
+@mainpage
+@copyright Copyright (c) 2012â€“2013 The Readium Foundation and contributors. Released under the GNU Public License, version 3.
+@author Jim Dovey
+@author Boris Schneidermann
+@author Shane Meyer
+
+ @defgroup utilities Utilities
+ 
+ @defgroup archives Archive Handling
+ 
+ @defgroup epub EPUBÂ® 3 Engine
+ @{
+    @defgroup epub-model EPUBÂ® 3 Model
+    @{
+        @defgroup navigation Navigation
+    @}
+
+    @defgroup content-proc EPUBÂ® 3 Content Processing
+    @{
+        @defgroup filters Content Filters
+        @defgroup media-handlers Content Handlers
+        @defgroup security Encryption and Signatures
+    @}
+    
+    @defgroup events Events Mechanism
+ @}
+ 
+ @defgroup xml XML Engine
+ @{
+    @defgroup validation Content Validation
+    @defgroup parsing XML Parsers
+    @defgroup tree DOM Tree
+    @defgroup xml-utils Utilities
+    @defgroup xmlsec XML Security
+ @}
+
+</member>
+        <!-- Discarding badly formed XML document comment for member 'M:Readium.Library.FileForEPubWithUniqueID(System.String)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:Readium.Library.FileForEPubWithPackageID(System.String)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:Readium.Container.FileExistsAtPath(System.String)'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.AsyncFileByteStream.#ctor(std.function<(<unknown type>,ePub3.AsyncByteStream*)(<unknown type>,ePub3.AsyncByteStream**)>,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32,System.UInt32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.AsyncZipFileByteStream.#ctor(std.function<(<unknown type>,ePub3.AsyncByteStream*)(<unknown type>,ePub3.AsyncByteStream**)>,zip*,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:ePub3.ObjectPreprocessor._objectMatcher'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:ePub3.ObjectPreprocessor._button'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.BasePath'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.ManifestItemsWithProperties(std.vector<ePub3.IRI,std.allocator<ePub3.IRI>>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.SpineCFIIndex'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.Package.InstallPrefixesFromAttributeValue(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.SpineItem.#ctor(std.shared_ptr<ePub3.Package>!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.SpineItem.at(System.Int32!System.Runtime.CompilerServices.IsLong)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.BasePath'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.ManifestItemsWithProperties(std.vector<ePub3.IRI,std.allocator<ePub3.IRI>>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.SpineCFIIndex'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.Package.InstallPrefixesFromAttributeValue(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'T:ePub3.RingBuffer'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.FilterPriority.SwitchStaticHandling'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.FilterPriority.ObjectPreprocessing'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.#ctor(std.shared_ptr<ePub3.xml.Document>,std.map<ePub3.string,ePub3.string,std.less<ePub3.string>,std.allocator<std.pair<ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string>>>!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.Matches(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.shared_ptr<ePub3.xml.Node>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.RegisterNamespaces(std.map<ePub3.string,ePub3.string,std.less<ePub3.string>,std.allocator<std.pair<ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string>>>!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.NameDefaultNamespace(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.FilterPriority.SwitchStaticHandling'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.FilterPriority.ObjectPreprocessing'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:ePub3.ContentFilter.SwitchStaticHandling'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:ePub3.ContentFilter.ObjectPreprocessing'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:Readium.Container.FileExistsAtPath(System.String)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.BasePath'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.ManifestItemsWithProperties(std.vector<ePub3.IRI,std.allocator<ePub3.IRI>>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.SpineCFIIndex'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.Package.InstallPrefixesFromAttributeValue(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.AsyncFileByteStream.#ctor(std.function<(<unknown type>,ePub3.AsyncByteStream*)(<unknown type>,ePub3.AsyncByteStream**)>,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32,System.UInt32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.AsyncZipFileByteStream.#ctor(std.function<(<unknown type>,ePub3.AsyncByteStream*)(<unknown type>,ePub3.AsyncByteStream**)>,zip*,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:Readium.Container.FileExistsAtPath(System.String)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.IRIForDCType(<unknown type>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'T:ePub3.UnknownPrefix'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.Property.LocalizedValue'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.#ctor(std.shared_ptr<ePub3.xml.Document>,std.map<ePub3.string,ePub3.string,std.less<ePub3.string>,std.allocator<std.pair<ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string>>>!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.Matches(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.shared_ptr<ePub3.xml.Node>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.RegisterNamespaces(std.map<ePub3.string,ePub3.string,std.less<ePub3.string>,std.allocator<std.pair<ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string>>>!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.NameDefaultNamespace(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.FilterPriority.SwitchStaticHandling'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.FilterPriority.ObjectPreprocessing'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.BasePath'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.ManifestItemsWithProperties(std.vector<ePub3.IRI,std.allocator<ePub3.IRI>>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.SpineCFIIndex'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.Package.InstallPrefixesFromAttributeValue(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.DigitalSignature.#ctor(std.shared_ptr<ePub3.xml.Node>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'T:ePub3.ContentHandler'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.BasePath'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.ManifestItemsWithProperties(std.vector<ePub3.IRI,std.allocator<ePub3.IRI>>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.SpineCFIIndex'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.Package.InstallPrefixesFromAttributeValue(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.BasePath'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.ManifestItemsWithProperties(std.vector<ePub3.IRI,std.allocator<ePub3.IRI>>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.SpineCFIIndex'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.Package.InstallPrefixesFromAttributeValue(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.#ctor(std.shared_ptr<ePub3.xml.Document>,std.map<ePub3.string,ePub3.string,std.less<ePub3.string>,std.allocator<std.pair<ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string>>>!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.Matches(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.shared_ptr<ePub3.xml.Node>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.RegisterNamespaces(std.map<ePub3.string,ePub3.string,std.less<ePub3.string>,std.allocator<std.pair<ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string>>>!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.NameDefaultNamespace(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.AsyncFileByteStream.#ctor(std.function<(<unknown type>,ePub3.AsyncByteStream*)(<unknown type>,ePub3.AsyncByteStream**)>,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32,System.UInt32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.AsyncZipFileByteStream.#ctor(std.function<(<unknown type>,ePub3.AsyncByteStream*)(<unknown type>,ePub3.AsyncByteStream**)>,zip*,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.CFI.#ctor(ePub3.CFI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.UInt32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.CFI.Assign(ePub3.CFI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.UInt32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.CFI.SubCFIFromIndex(System.UInt32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+        <!-- Discarding badly formed XML document comment for member 'T:ePub3.SwitchPreprocessor'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:ePub3.SwitchPreprocessor.CommentedSwitchIdentifier'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.BasePath'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.ManifestItemsWithProperties(std.vector<ePub3.IRI,std.allocator<ePub3.IRI>>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.SpineCFIIndex'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.Package.InstallPrefixesFromAttributeValue(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.BasePath'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.ManifestItemsWithProperties(std.vector<ePub3.IRI,std.allocator<ePub3.IRI>>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.SpineCFIIndex'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.Package.InstallPrefixesFromAttributeValue(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.AsyncFileByteStream.#ctor(std.function<(<unknown type>,ePub3.AsyncByteStream*)(<unknown type>,ePub3.AsyncByteStream**)>,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32,System.UInt32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.AsyncZipFileByteStream.#ctor(std.function<(<unknown type>,ePub3.AsyncByteStream*)(<unknown type>,ePub3.AsyncByteStream**)>,zip*,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.#ctor(std.shared_ptr<ePub3.xml.Document>,std.map<ePub3.string,ePub3.string,std.less<ePub3.string>,std.allocator<std.pair<ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string>>>!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.Matches(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.shared_ptr<ePub3.xml.Node>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.RegisterNamespaces(std.map<ePub3.string,ePub3.string,std.less<ePub3.string>,std.allocator<std.pair<ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string>>>!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.NameDefaultNamespace(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.AsyncFileByteStream.#ctor(std.function<(<unknown type>,ePub3.AsyncByteStream*)(<unknown type>,ePub3.AsyncByteStream**)>,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32,System.UInt32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.AsyncZipFileByteStream.#ctor(std.function<(<unknown type>,ePub3.AsyncByteStream*)(<unknown type>,ePub3.AsyncByteStream**)>,zip*,ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Int32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:Readium.Container.FileExistsAtPath(System.String)'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.FilterPriority.SwitchStaticHandling'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.FilterPriority.ObjectPreprocessing'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:Readium.Container.FileExistsAtPath(System.String)'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.FilterPriority.SwitchStaticHandling'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.FilterPriority.ObjectPreprocessing'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.Archive.ReaderAtPath(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.Archive.WriterAtPath(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Boolean,System.Boolean)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.Archive.#ctor'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.#ctor(std.shared_ptr<ePub3.xml.Document>,std.map<ePub3.string,ePub3.string,std.less<ePub3.string>,std.allocator<std.pair<ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string>>>!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.Matches(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.shared_ptr<ePub3.xml.Node>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.RegisterNamespaces(std.map<ePub3.string,ePub3.string,std.less<ePub3.string>,std.allocator<std.pair<ePub3.string!System.Runtime.CompilerServices.IsConst,ePub3.string>>>!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.XPathWrangler.NameDefaultNamespace(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.BasePath'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.ManifestItemsWithProperties(std.vector<ePub3.IRI,std.allocator<ePub3.IRI>>)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.PackageBase.SpineCFIIndex'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.Package.InstallPrefixesFromAttributeValue(ePub3.string!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.CFI.#ctor(ePub3.CFI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.UInt32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.CFI.Assign(ePub3.CFI!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.UInt32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:ePub3.CFI.SubCFIFromIndex(System.UInt32)'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageSpread.Center'. -->
+        <!-- Discarding badly formed XML document comment for member 'F:Readium.PageProgression.RightToLeft'. -->
+    </members>
+</doc>

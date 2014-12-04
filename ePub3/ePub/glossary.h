@@ -31,7 +31,7 @@ EPUB3_BEGIN_NAMESPACE
  @ingroup navigation
  */
 class Glossary : public NavigationElement, public PointerType<Glossary>, public OwnedBy<Package>
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	, public NativeBridge
 #endif
 {

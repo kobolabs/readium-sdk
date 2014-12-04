@@ -521,7 +521,7 @@ void RunLoop::EventSource::Signal()
     ::SetEvent(_event);
 }
 
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 ref class TimerCallbackWrapper
 {
 private:
@@ -542,7 +542,7 @@ RunLoop::Timer::Timer(Clock::time_point& fireDate, Clock::duration& interval, Ti
 {
     using namespace std::chrono;
 
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	_handle = ::CreateEventEx(NULL, NULL, 0, 0);
 	if (_handle == NULL)
 		_THROW_LAST_ERROR();
@@ -592,7 +592,7 @@ RunLoop::Timer::Timer(Clock::time_point& fireDate, Clock::duration& interval, Ti
 RunLoop::Timer::Timer(Clock::duration& interval, bool repeat, TimerFn fn) : _runLoops(), _fireDate(Clock::now() + interval), _interval(interval), _fn(fn)
 {
     using namespace std::chrono;
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	_handle = ::CreateEventEx(NULL, NULL, 0, 0);
     if ( _handle == NULL )
 		_THROW_LAST_ERROR();
@@ -631,7 +631,7 @@ RunLoop::Timer::Timer(Clock::duration& interval, bool repeat, TimerFn fn) : _run
 RunLoop::Timer::Timer(const Timer& o) : _runLoops(), _fireDate(o._fireDate), _interval(o._interval), _fn(o._fn)
 {
     using namespace std::chrono;
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	_handle = ::CreateEventEx(NULL, NULL, 0, 0);
 	if (_handle == NULL)
 		_THROW_LAST_ERROR();
@@ -676,12 +676,12 @@ RunLoop::Timer::Timer(const Timer& o) : _runLoops(), _fireDate(o._fireDate), _in
 #endif
 }
 RunLoop::Timer::Timer(Timer&& o) : _runLoops(std::move(o._runLoops)), _fireDate(std::move(_fireDate)), _interval(std::move(o._interval)), _fn(std::move(o._fn)),
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	_timer(o._timer),
 #endif
 	_handle(o._handle)
 {
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	o._timer = nullptr;
 #endif
 	auto self = shared_from_this();
@@ -700,7 +700,7 @@ RunLoop::Timer::Timer(Timer&& o) : _runLoops(std::move(o._runLoops)), _fireDate(
 }
 RunLoop::Timer::~Timer()
 {
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	if (!IsCancelled())
 		_timer->Cancel();
 	_timer = nullptr;
@@ -716,7 +716,7 @@ RunLoop::Timer& RunLoop::Timer::operator=(const Timer& o)
     _fireDate = o._fireDate;
     _interval = o._interval;
     _cancelled = o._cancelled;
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	if (_handle != NULL)
 	{
 		CloseHandle(_handle);
@@ -778,7 +778,7 @@ RunLoop::Timer& RunLoop::Timer::operator=(Timer&& o)
     _fireDate = std::move(o._fireDate);
     _interval = std::move(o._interval);
     _cancelled = o._cancelled;
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	_timer = o._timer;
 	o._timer = nullptr;
 
@@ -814,7 +814,7 @@ void RunLoop::Timer::Cancel()
 		return;
 
     _cancelled = true;
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	if (_timer != nullptr)
 		_timer->Cancel();
 
@@ -855,7 +855,7 @@ void RunLoop::Timer::SetNextFireDateTime(Clock::time_point& when)
     if ( _cancelled )
         return;
 	_fireDate = when;
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	if (_timer != nullptr)
 	{
 		_timer->Cancel();
@@ -886,7 +886,7 @@ void RunLoop::Timer::SetNextFireDateDuration(Clock::duration& when)
         return;
 
 	_fireDate = Clock::now() + when;
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	if (_timer != nullptr)
 	{
 		_timer->Cancel();
@@ -906,18 +906,18 @@ void RunLoop::Timer::SetNextFireDateDuration(Clock::duration& when)
 #endif
 }
 
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 
 DWORD RunLoop::RunLoopTLSKey = TLS_OUT_OF_INDEXES;
 
 void RunLoop::KillRunLoopTLSKey() {
 	if (RunLoop::RunLoopTLSKey != TLS_OUT_OF_INDEXES) {
-		TlsFree(RunLoop::RunLoopTLSKey);
+		ThreadEmulation::TlsFree(RunLoop::RunLoopTLSKey);
 	}
 }
 
 void RunLoop::InitRunLoopTLSKey() {
-	RunLoopTLSKey = TlsAlloc();
+	RunLoopTLSKey = ThreadEmulation::TlsAlloc();
 	if (RunLoopTLSKey == TLS_OUT_OF_INDEXES)
 	{
 		OutputDebugString(L"No TLS Indexes for RunLoop!\n");

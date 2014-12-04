@@ -23,7 +23,7 @@
 #include "integer_sequence.h"
 #include <locale>
 
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 // need a converter from UTF-8 to Windows' wchar_t
 #include <codecvt>
 typedef std::wstring_convert<std::codecvt_utf8<wchar_t>> WinRTCharConverter;

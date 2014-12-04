@@ -40,8 +40,6 @@
 
 #include "zipint.h"
 
-
-
 ZIP_EXTERN int
 zip_error_to_str(char *buf, size_t len, int ze, int se)
 {

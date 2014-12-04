@@ -127,7 +127,7 @@ class inline_executor;
 class thread_executor;
 
 class __thread_pool_impl_stdcpp;
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 class __thread_pool_impl_winrt;
 #endif
 
@@ -179,7 +179,7 @@ protected:
         }
 
 	friend class __thread_pool_impl_stdcpp;
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	friend class __thread_pool_impl_winrt;
 #endif
     
@@ -616,7 +616,7 @@ private:
 	friend class thread_pool;
 };
 
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 class __thread_pool_impl_winrt : public std::enable_shared_from_this<__thread_pool_impl_winrt>
 {
 	typedef ::Windows::System::Threading::ThreadPool		thread_pool;
@@ -659,7 +659,7 @@ private:
 class thread_pool : public scheduled_executor
 {
 private:
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	typedef __thread_pool_impl_winrt	impl_t;
 #else
 	typedef __thread_pool_impl_stdcpp	impl_t;

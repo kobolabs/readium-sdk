@@ -29,17 +29,15 @@
 #include <windows.h>
 #include <Wincrypt.h>
 #elif EPUB_PLATFORM(WINRT)
-#if EPUB_PLATFORM(WIN_PHONE)
+using namespace ::Platform;
+using namespace ::Windows::Security::Cryptography;
+using namespace ::Windows::Security::Cryptography::Core;
+#elif EPUB_PLATFORM(WIN_PHONE)
 #include <robuffer.h>
 #include <wrl.h>
 #include <wrl/client.h>
-using namespace ::PhoneSupportInterfaces;
-#else
-using namespace ::Windows::Security::Cryptography;
-using namespace ::Windows::Security::Cryptography::Core;
-#endif
 using namespace ::Platform;
-//using namespace ::Windows::Storage::Streams;
+using namespace ::PhoneSupportInterfaces;
 #else
 #include <openssl/sha.h>
 #endif
