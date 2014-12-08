@@ -40,7 +40,7 @@ typedef shared_ptr<PropertyExtension>   PropertyExtensionPtr;
 ///
 /// An extension to an existing property, providing additional related metadata.
 class PropertyExtension : public PointerType<PropertyExtension>, public OwnedBy<Property>, public XMLIdentifiable
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	, public NativeBridge
 #endif
 {

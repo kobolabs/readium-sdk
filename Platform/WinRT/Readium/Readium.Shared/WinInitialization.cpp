@@ -5,7 +5,7 @@ BEGIN_READIUM_API
 
 void Initialization::InitializeSdk()
 {
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	ePub3::RunLoop::InitRunLoopTLSKey();
 #endif
 	ePub3::InitializeSdk();

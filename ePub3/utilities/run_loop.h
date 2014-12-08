@@ -52,7 +52,7 @@ struct ALooper;
 #include "cf_helpers.h"
 #endif
 
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 #include "ThreadEmulation.h"
 using namespace Windows::System::Threading;
 #endif
@@ -273,7 +273,7 @@ public:
         int									_pipeFDs[2];///< The pipe endpoints used with ALooper.
         TimerFn								_fn;        ///< The function to call when the timer fires.
 #elif EPUB_OS(WINDOWS)
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 		ThreadPoolTimer^					_timer;
 #endif
 		HANDLE								_handle;
@@ -509,7 +509,7 @@ public:
     EPUB3_EXPORT
     void            WakeUp();
     
-# if EPUB_OS(WINDOWS) && EPUB_PLATFORM(WINRT)
+# if EPUB_OS(WINDOWS) && (EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE))
 	static void InitRunLoopTLSKey();
 	static void KillRunLoopTLSKey();
 # endif
@@ -587,7 +587,7 @@ private:
     Observer::Activity                  _observerMask;
 
 
-# if EPUB_PLATFORM(WINRT)
+# if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	static DWORD RunLoopTLSKey;
 # endif
 #else

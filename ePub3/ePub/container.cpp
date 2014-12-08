@@ -48,14 +48,14 @@ std::future<_Tp> __make_ready_future(_Tp& value)
 }
 
 Container::Container() :
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	NativeBridge(),
 #endif
 	_archive(nullptr), _ocf(nullptr), _packages(), _encryption(), _path()
 {
 }
 Container::Container(Container&& o) :
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 NativeBridge(),
 #endif
 _archive(std::move(o._archive)), _ocf(o._ocf), _packages(std::move(o._packages)), _path(std::move(o._path))
@@ -249,7 +249,7 @@ async_result<ContainerPtr> Container::OpenContainerAsync(const string& path, lau
     
     return result;
 }
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 ContainerPtr Container::OpenSynchronouslyForWinRT(const string& path)
 {
 	auto future = ContentModuleManager::Instance()->LoadContentAtPath(path, launch::deferred);

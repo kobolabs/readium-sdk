@@ -62,7 +62,7 @@ typedef std::map<string, shared_ptr<ManifestItem>>  ManifestTable;
  @ingroup epub-model
  */
 class ItemProperties
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	: public NativeBridge
 #endif
 {
@@ -255,7 +255,7 @@ private:
  @ingroup epub-model
  */
 class ManifestItem : public PointerType<ManifestItem>, public OwnedBy<Package>, public PropertyHolder, public XMLIdentifiable
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	, public NativeBridge
 #endif
 {

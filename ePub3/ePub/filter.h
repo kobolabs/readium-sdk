@@ -91,7 +91,7 @@ public:
  @ingroup filters
  */
 class ContentFilter
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	: public NativeBridge
 #endif
 {

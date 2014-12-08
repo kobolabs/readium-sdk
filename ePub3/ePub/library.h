@@ -51,7 +51,7 @@ EPUB3_BEGIN_NAMESPACE
  @ingroup utilities
  */
 class Library
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	: public NativeBridge
 #endif
 {

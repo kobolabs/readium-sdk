@@ -45,7 +45,7 @@ class ManifestItem;
  @ingroup utilities
  */
 class MediaSupportInfo : public PointerType<MediaSupportInfo>, public OwnedBy<Package>
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	, public NativeBridge
 #endif
 {

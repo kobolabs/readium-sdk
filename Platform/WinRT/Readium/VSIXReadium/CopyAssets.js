@@ -19,7 +19,7 @@
  */
 
 var fso = new ActiveXObject("Scripting.FileSystemObject");
-var srcRoot = fso.GetFolder("..\\Readium").Path;
+var srcRoot = fso.GetFolder("..\\Readium.Shared").Path;
 var deployRoot = fso.GetFolder("..\\").Path;
 
 var configurations =
@@ -32,7 +32,7 @@ var architectures =
     [
         ["ARM", "arm"],
         ["Win32", "x86"],
-        ["x64", "x64"]
+        ["Win32", "x64"]
     ]
 
 

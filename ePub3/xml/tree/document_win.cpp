@@ -28,7 +28,7 @@
 #if EPUB_USE(WIN_XML)
 using namespace ::Windows::Data::Xml::Dom;
 #elif EPUB_USE(WIN_PHONE_XML)
-using namespace ::PhoneSupportInterfaces;
+using namespace PhoneSupportInterfaces;
 #endif
 
 #if 0

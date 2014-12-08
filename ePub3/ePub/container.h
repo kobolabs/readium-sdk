@@ -35,7 +35,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 // Bit of a hack -- make the WinRT Container class available so we can befriend it.
 
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 namespace Readium
 {
 	ref class Container;
@@ -66,7 +66,7 @@ class ByteStream;
  @ingroup epub-model
  */
 class Container : public PointerType<Container>
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	, public NativeBridge
 #endif
 {
@@ -201,7 +201,7 @@ protected:
 	// This is here because we're seeing weird stuff happen with nested IAsyncAction()
 	// stuff on WinRT, and we've got 2 days to make it work. Proper solution forthcoming.
 
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	friend ref class ::Readium::Container;
 	static ContainerPtr OpenSynchronouslyForWinRT(const string& path);
 #endif

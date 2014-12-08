@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{616eb0cc-c086-4185-833a-6585cf06ebf3}</ProjectGuid>
+    <RootNamespace>Readium</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Phone</ApplicationType>
+    <ApplicationTypeRevision>8.1</ApplicationTypeRevision>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120_wp81</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120_wp81</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v120_wp81</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v120_wp81</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="..\Readium.Shared\Readium.Shared.vcxitems" Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)deploy\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
+    <IntDir>build\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(RootNamespace)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)deploy\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
+    <IntDir>build\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(RootNamespace)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <OutDir>$(SolutionDir)deploy\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
+    <IntDir>build\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(RootNamespace)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <OutDir>$(SolutionDir)deploy\$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
+    <IntDir>build\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(RootNamespace)</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>_WINRT_DLL;BUILDING_EPUB3;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\..\include;$(MSBuildProjectDirectory)\..\..\..\..\ePub3;$(MSBuildProjectDirectory)\..\..\..\..\ePub3\utilities;$(MSBuildProjectDirectory)\..\..\..\..\ePub3\ePub;$(MSBuildProjectDirectory)\..\..\..\..\ePub3\ThirdParty;$(MSBuildProjectDirectory)\..\Prebuilt\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>zlib.lib;WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\..\Prebuilt\Lib\i386</AdditionalLibraryDirectories>
+      <OutputFile>$(OutDir)$(RootNamespace)$(TargetExt)</OutputFile>
+      <ManifestFile>$(IntDir)$(RootNamespace)$(TargetExt).intermediate.manifest</ManifestFile>
+      <ProgramDatabaseFile>$(OutDir)$(RootNamespace).pdb</ProgramDatabaseFile>
+      <ProfileGuidedDatabase>$(OutDir)$(RootNamespace).pgd</ProfileGuidedDatabase>
+    </Link>
+    <Xdcmake>
+      <AdditionalDocumentFile>build\$(Platform)\$(Configuration)\Win*.xdc</AdditionalDocumentFile>
+      <DocumentLibraryDependencies>false</DocumentLibraryDependencies>
+    </Xdcmake>
+    <PreBuildEvent>
+      <Command>cd $(MSBuildProjectDirectory)\..\..
+cscript MakeHeaders.js</Command>
+      <Message>Create Canonical Headers</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>_WINRT_DLL;NDEBUG;BUILDING_EPUB3;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\..\include;$(MSBuildProjectDirectory)\..\..\..\..\ePub3;$(MSBuildProjectDirectory)\..\..\..\..\ePub3\utilities;$(MSBuildProjectDirectory)\..\..\..\..\ePub3\ePub;$(MSBuildProjectDirectory)\..\..\..\..\ePub3\ThirdParty;$(MSBuildProjectDirectory)\..\Prebuilt\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>zlib.lib;WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\..\Prebuilt\Lib\i386</AdditionalLibraryDirectories>
+      <OutputFile>$(OutDir)$(RootNamespace)$(TargetExt)</OutputFile>
+      <ManifestFile>$(IntDir)$(RootNamespace)$(TargetExt).intermediate.manifest</ManifestFile>
+      <ProgramDatabaseFile>$(OutDir)$(RootNamespace).pdb</ProgramDatabaseFile>
+      <ProfileGuidedDatabase>$(OutDir)$(RootNamespace).pgd</ProfileGuidedDatabase>
+    </Link>
+    <Xdcmake>
+      <AdditionalDocumentFile>build\$(Platform)\$(Configuration)\Win*.xdc</AdditionalDocumentFile>
+      <DocumentLibraryDependencies>false</DocumentLibraryDependencies>
+    </Xdcmake>
+    <PreBuildEvent>
+      <Command>cd $(MSBuildProjectDirectory)\..\..
+cscript MakeHeaders.js</Command>
+      <Message>Create Canonical Headers</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>_WINRT_DLL;BUILDING_EPUB3;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\..\include;$(MSBuildProjectDirectory)\..\..\..\..\ePub3;$(MSBuildProjectDirectory)\..\..\..\..\ePub3\utilities;$(MSBuildProjectDirectory)\..\..\..\..\ePub3\ePub;$(MSBuildProjectDirectory)\..\..\..\..\ePub3\ThirdParty;$(MSBuildProjectDirectory)\..\Prebuilt\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>zlib.lib;WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\..\Prebuilt\Lib\ARMv7</AdditionalLibraryDirectories>
+      <OutputFile>$(OutDir)$(RootNamespace)$(TargetExt)</OutputFile>
+      <ManifestFile>$(IntDir)$(RootNamespace)$(TargetExt).intermediate.manifest</ManifestFile>
+      <ProgramDatabaseFile>$(OutDir)$(RootNamespace).pdb</ProgramDatabaseFile>
+      <ProfileGuidedDatabase>$(OutDir)$(RootNamespace).pgd</ProfileGuidedDatabase>
+    </Link>
+    <Xdcmake>
+      <AdditionalDocumentFile>build\$(Platform)\$(Configuration)\Win*.xdc</AdditionalDocumentFile>
+      <DocumentLibraryDependencies>false</DocumentLibraryDependencies>
+    </Xdcmake>
+    <PreBuildEvent>
+      <Command>cd $(MSBuildProjectDirectory)\..\..
+cscript MakeHeaders.js</Command>
+      <Message>Create Canonical Headers</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>_WINRT_DLL;NDEBUG;BUILDING_EPUB3;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\..\include;$(MSBuildProjectDirectory)\..\..\..\..\ePub3;$(MSBuildProjectDirectory)\..\..\..\..\ePub3\utilities;$(MSBuildProjectDirectory)\..\..\..\..\ePub3\ePub;$(MSBuildProjectDirectory)\..\..\..\..\ePub3\ThirdParty;$(MSBuildProjectDirectory)\..\Prebuilt\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>zlib.lib;WindowsPhoneCore.lib;RuntimeObject.lib;PhoneAppModelHost.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(MSBuildProjectDirectory)\..\Prebuilt\Lib\ARMv7</AdditionalLibraryDirectories>
+      <OutputFile>$(OutDir)$(RootNamespace)$(TargetExt)</OutputFile>
+      <ManifestFile>$(IntDir)$(RootNamespace)$(TargetExt).intermediate.manifest</ManifestFile>
+      <ProgramDatabaseFile>$(OutDir)$(RootNamespace).pdb</ProgramDatabaseFile>
+      <ProfileGuidedDatabase>$(OutDir)$(RootNamespace).pgd</ProfileGuidedDatabase>
+    </Link>
+    <Xdcmake>
+      <AdditionalDocumentFile>build\$(Platform)\$(Configuration)\Win*.xdc</AdditionalDocumentFile>
+      <DocumentLibraryDependencies>false</DocumentLibraryDependencies>
+    </Xdcmake>
+    <PreBuildEvent>
+      <Command>cd $(MSBuildProjectDirectory)\..\..
+cscript MakeHeaders.js</Command>
+      <Message>Create Canonical Headers</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

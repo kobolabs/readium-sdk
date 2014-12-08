@@ -1,0 +1,905 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ePub3">
+      <UniqueIdentifier>{9e37daf7-4d58-4f92-9290-f7dce6475680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\ePub">
+      <UniqueIdentifier>{81e8c623-7570-480d-802c-771b093e2af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\ePub\Filters">
+      <UniqueIdentifier>{ceb38c15-8cad-4e52-af61-6f18cdcf6be3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\ePub\Filters\Content Preprocessing">
+      <UniqueIdentifier>{92548bd8-63e1-449a-8ed9-c0c2ab656f29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\ePub\Filters\Encryption">
+      <UniqueIdentifier>{de4a6997-c02a-46bf-a0e3-2028b80dc2d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\ePub\Library">
+      <UniqueIdentifier>{8c65de73-a55f-4de1-82c9-f8b2606e6f8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\ePub\Components">
+      <UniqueIdentifier>{f9a5d174-d519-4e83-8426-4ade108c4479}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\ePub\Components\Properties">
+      <UniqueIdentifier>{c2a1be52-6d29-4cf1-bddf-b2f0eea58705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\ePub\Components\Navigation">
+      <UniqueIdentifier>{30e71fa7-b66c-46c2-966c-0ba5fc68543d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\ePub\Archives">
+      <UniqueIdentifier>{b61cc884-3ffc-43c7-ad6b-29b29e450bc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\ePub\ContentModule">
+      <UniqueIdentifier>{35e0cf59-ea64-4f0f-8407-640158cfcbb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\xml">
+      <UniqueIdentifier>{ac7560f2-59d6-40f1-9e3d-68214c7962c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\xml\tree">
+      <UniqueIdentifier>{768e18d8-c0e3-4463-bfff-1725ed1c591f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\xml\utilities">
+      <UniqueIdentifier>{6b92c38a-c885-4d81-b311-c83397a76656}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\xml\validation">
+      <UniqueIdentifier>{42e2d0ee-c3a6-474e-b8cf-f2a0802e0d3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\utilities">
+      <UniqueIdentifier>{60f167f9-f954-4730-9721-5c5f86e64b09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\ThirdParty">
+      <UniqueIdentifier>{d212b4f5-dd89-42a0-9135-86804c905314}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\ThirdParty\google-url">
+      <UniqueIdentifier>{847f3db8-9bc2-4ff2-a520-75ccfdef5c94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ePub3\ThirdParty\libzip">
+      <UniqueIdentifier>{62525a9f-fc57-4235-a268-f4046660da09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThreadEmulation">
+      <UniqueIdentifier>{132d55de-084c-4756-8006-270108dd79a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public Interface">
+      <UniqueIdentifier>{1112074f-391d-4c23-b630-59245182ebcd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\base.h">
+      <Filter>ePub3</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\epub3.h">
+      <Filter>ePub3</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\_compiler.h">
+      <Filter>ePub3</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\_config.h">
+      <Filter>ePub3</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\_platform.h">
+      <Filter>ePub3</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\Forward.h">
+      <Filter>ePub3\ePub</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\xpath_wrangler.h">
+      <Filter>ePub3\ePub</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\filter.h">
+      <Filter>ePub3\ePub\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\filter_chain.h">
+      <Filter>ePub3\ePub\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\filter_manager.h">
+      <Filter>ePub3\ePub\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\filter_manager_impl.h">
+      <Filter>ePub3\ePub\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\object_preprocessor.h">
+      <Filter>ePub3\ePub\Filters\Content Preprocessing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\switch_preprocessor.h">
+      <Filter>ePub3\ePub\Filters\Content Preprocessing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\font_obfuscation.h">
+      <Filter>ePub3\ePub\Filters\Encryption</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\library.h">
+      <Filter>ePub3\ePub\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\cfi.h">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\container.h">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\content_handler.h">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\encryption.h">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\ibooks_options.h">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\initialization.h">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\manifest.h">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\media_support_info.h">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\package.h">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\signatures.h">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\spine.h">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\property.h">
+      <Filter>ePub3\ePub\Components\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\property_extension.h">
+      <Filter>ePub3\ePub\Components\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\property_holder.h">
+      <Filter>ePub3\ePub\Components\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\glossary.h">
+      <Filter>ePub3\ePub\Components\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\nav_element.h">
+      <Filter>ePub3\ePub\Components\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\nav_point.h">
+      <Filter>ePub3\ePub\Components\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\nav_table.h">
+      <Filter>ePub3\ePub\Components\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\archive.h">
+      <Filter>ePub3\ePub\Archives</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\archive_xml.h">
+      <Filter>ePub3\ePub\Archives</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\zip_archive.h">
+      <Filter>ePub3\ePub\Archives</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\content_module.h">
+      <Filter>ePub3\ePub\ContentModule</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\content_module_manager.h">
+      <Filter>ePub3\ePub\ContentModule</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\credential_request.h">
+      <Filter>ePub3\ePub\ContentModule</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\user_action.h">
+      <Filter>ePub3\ePub\ContentModule</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\tree\document.h">
+      <Filter>ePub3\xml\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\tree\element.h">
+      <Filter>ePub3\xml\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\tree\node.h">
+      <Filter>ePub3\xml\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\tree\xpath.h">
+      <Filter>ePub3\xml\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\utilities\base.h">
+      <Filter>ePub3\xml\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\utilities\io.h">
+      <Filter>ePub3\xml\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\utilities\xmlstring.h">
+      <Filter>ePub3\xml\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\validation\c14n.h">
+      <Filter>ePub3\xml\validation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\validation\dtd.h">
+      <Filter>ePub3\xml\validation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\validation\ns.h">
+      <Filter>ePub3\xml\validation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\validation\schema.h">
+      <Filter>ePub3\xml\validation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\basic.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\byte_buffer.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\byte_stream.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\compressed_pair.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\condition_variable_any.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\CPUCacheUtils.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\epub_locale.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\error_handler.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\executor.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\future.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\integer_sequence.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\invoke.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\iri.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\make_unique.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\NativeBridge.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\optional.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\owned_by.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\path_help.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\pointer_type.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\ring_buffer.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\run_loop.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\string_view.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\swap_traits.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\utfstring.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\xml_identifiable.h">
+      <Filter>ePub3\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\base\basictypes.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\base\logging.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\base\scoped_ptr.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\base\string16.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\gurl.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_cpp11.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_internal.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_internal_file.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_ip.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_stdstring.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_common.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_file.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_parse.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_parse_internal.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_util.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_util_internal.h">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\Config.h">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip.h">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zipint.h">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ThreadEmulation.h">
+      <Filter>ThreadEmulation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BufferBridge.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CollectionBridges.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ExceptionWrapper.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IContentFilter.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IContentHandler.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IContentModule.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)INavigationElement.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)IPropertyHolder.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NavElementList.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PluginMaps.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PropertyHolderImpl.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PropertyHolderSubclassDecl.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PropertyHolderSubclassImpl.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)PropertyTypes.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Readium.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Streams.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinCFI.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinContainer.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinContentModuleManager.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinCredentialRequest.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinEncryptionInfo.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinErrorHandler.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinFilterChain.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinFilterManager.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinInitialization.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinLibrary.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinManifest.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinMediaHandler.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinMediaSupport.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinNavPoint.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinNavTable.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinPackage.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinProperty.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinPropertyExtension.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WinSpine.h">
+      <Filter>Public Interface</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\xpath_wrangler.cpp">
+      <Filter>ePub3\ePub</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\filter_chain.cpp">
+      <Filter>ePub3\ePub\Filters</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\filter_manager.cpp">
+      <Filter>ePub3\ePub\Filters</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\filter_manager_impl.cpp">
+      <Filter>ePub3\ePub\Filters</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\object_preprocessor.cpp">
+      <Filter>ePub3\ePub\Filters\Content Preprocessing</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\switch_preprocessor.cpp">
+      <Filter>ePub3\ePub\Filters\Content Preprocessing</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\font_obfuscation.cpp">
+      <Filter>ePub3\ePub\Filters\Encryption</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\library.cpp">
+      <Filter>ePub3\ePub\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\cfi.cpp">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\container.cpp">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\content_handler.cpp">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\encryption.cpp">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\ibooks_options.cpp">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\initialization.cpp">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\manifest.cpp">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\media_support_info.cpp">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\package.cpp">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\signatures.cpp">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\spine.cpp">
+      <Filter>ePub3\ePub\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\property.cpp">
+      <Filter>ePub3\ePub\Components\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\property_extension.cpp">
+      <Filter>ePub3\ePub\Components\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\property_holder.cpp">
+      <Filter>ePub3\ePub\Components\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\glossary.cpp">
+      <Filter>ePub3\ePub\Components\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\nav_point.cpp">
+      <Filter>ePub3\ePub\Components\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\nav_table.cpp">
+      <Filter>ePub3\ePub\Components\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\archive.cpp">
+      <Filter>ePub3\ePub\Archives</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\archive_xml.cpp">
+      <Filter>ePub3\ePub\Archives</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\zip_archive.cpp">
+      <Filter>ePub3\ePub\Archives</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\content_module_manager.cpp">
+      <Filter>ePub3\ePub\ContentModule</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ePub\credential_request.cpp">
+      <Filter>ePub3\ePub\ContentModule</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\tree\document_win.cpp">
+      <Filter>ePub3\xml\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\tree\element_win.cpp">
+      <Filter>ePub3\xml\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\tree\node_win.cpp">
+      <Filter>ePub3\xml\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\tree\xpath_win.cpp">
+      <Filter>ePub3\xml\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\xml\utilities\io_win.cpp">
+      <Filter>ePub3\xml\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\byte_buffer.cpp">
+      <Filter>ePub3\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\byte_stream.cpp">
+      <Filter>ePub3\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\CPUCacheUtils_win.cpp">
+      <Filter>ePub3\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\epub_locale.cpp">
+      <Filter>ePub3\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\error_handler.cpp">
+      <Filter>ePub3\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\executor.cpp">
+      <Filter>ePub3\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\future.cpp">
+      <Filter>ePub3\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\iri.cpp">
+      <Filter>ePub3\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\optional.cpp">
+      <Filter>ePub3\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\path_help.cpp">
+      <Filter>ePub3\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\ring_buffer.cpp">
+      <Filter>ePub3\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\run_loop_windows.cpp">
+      <Filter>ePub3\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\utfstring.cpp">
+      <Filter>ePub3\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\base\string16.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\gurl.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_cpp11.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_etc.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_filesystemurl.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_fileurl.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_host.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_internal.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_ip.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_mailtourl.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_path.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_pathurl.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_query.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_relative.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_canon_stdurl.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_parse.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_parse_file.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\google-url\src\url_util.cc">
+      <Filter>ePub3\ThirdParty\google-url</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\mkstemp.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_add.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_add_dir.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_close.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_delete.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_dirent.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_entry_free.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_entry_new.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_error.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_error_clear.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_error_get.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_error_get_sys_type.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_error_strerror.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_error_to_str.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_err_str.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_fclose.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_filerange_crc.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_file_error_clear.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_file_error_get.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_file_get_offset.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_file_strerror.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_fopen.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_fopen_index.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_fread.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_free.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_fseek.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_ftell.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_get_archive_comment.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_get_archive_flag.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_get_file_comment.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_get_name.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_get_num_files.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_memdup.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_name_locate.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_new.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_open.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_rename.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_replace.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_set_archive_comment.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_set_archive_flag.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_set_file_comment.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_set_name.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_source_buffer.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_source_file.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_source_filep.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_source_free.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_source_function.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_source_zip.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_stat.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_stat_index.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_stat_init.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_strerror.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_unchange.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_unchange_all.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_unchange_archive.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\ThirdParty\libzip\zip_unchange_data.c">
+      <Filter>ePub3\ThirdParty\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ThreadEmulation.cpp">
+      <Filter>ThreadEmulation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)PluginMaps.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Streams.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinCFI.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinContainer.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinContentModuleManager.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinCredentialRequest.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinEncryptionInfo.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinErrorHandler.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinFilterChain.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinFilterManager.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinInitialization.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinLibrary.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinManifest.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinMediaHandler.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinMediaSupport.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinNavPoint.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinNavTable.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinPackage.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinProperty.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinPropertyExtension.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinSpine.cpp">
+      <Filter>Public Interface</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\..\..\..\ePub3\utilities\utfstringspec.inl">
+      <Filter>ePub3\utilities</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -84,6 +84,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="license.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Redist\Debug\arm\PhoneSupportInterfaces.dll">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>

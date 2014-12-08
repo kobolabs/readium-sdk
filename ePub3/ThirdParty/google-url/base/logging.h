@@ -245,7 +245,7 @@ std::string* MakeCheckOpString(const int& v1, const int& v2, const char* names) 
 //     foo.CheckThatFoo();
 //   #endif
 
-#if defined(NDEBUG) && !EPUB_PLATFORM(WINRT)
+#if defined(NDEBUG) && !EPUB_PLATFORM(WINRT)  && !EPUB_PLATFORM(WIN_PHONE)
 
 #define DLOG(severity) LOG(severity)
 #define DLOG_IF(severity, condition) LOG_IF(severity, condition)

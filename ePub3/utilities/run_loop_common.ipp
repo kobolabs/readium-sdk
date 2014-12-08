@@ -26,7 +26,7 @@ ePub3::RunLoopPtr ePub3::RunLoop::CurrentRunLoop()
 #if EPUB_OS(WINDOWS)
 # include <windows.h>
 # include <stdio.h>
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 # include "ThreadEmulation.h"
 using namespace ThreadEmulation;
 #endif
@@ -42,7 +42,7 @@ using namespace ThreadEmulation;
 
 EPUB3_BEGIN_NAMESPACE
 #if EPUB_OS(WINDOWS) 
-# if !EPUB_PLATFORM(WINRT)
+# if !EPUB_PLATFORM(WINRT) && !EPUB_PLATFORM(WIN_PHONE)
 # ifndef TLS_OUT_OF_INDEXES
 # define TLS_OUT_OF_INDEXES ((DWORD)0xffffffff)
 # endif
@@ -60,7 +60,7 @@ static void _DestroyTLSRunLoop(void* data)
 }
 #endif
 
-# if !EPUB_PLATFORM(WINRT)
+# if !EPUB_PLATFORM(WINRT)  && !EPUB_PLATFORM(WIN_PHONE)
 static void KillRunLoopTLSKey()
 {
 #if EPUB_OS(WINDOWS)
@@ -89,11 +89,11 @@ INITIALIZER(InitRunLoopTLSKey)
 
 RunLoopPtr RunLoop::CurrentRunLoop()
 {
-    RunLoopPtr* p = reinterpret_cast<RunLoopPtr*>(TLS_GET(RunLoopTLSKey));
+    RunLoopPtr* p = reinterpret_cast<RunLoopPtr*>(ThreadEmulation::TLS_GET(RunLoopTLSKey));
     if ( p == nullptr )
     {
         p = new std::shared_ptr<RunLoop>(new RunLoop());
-        TLS_SET(RunLoopTLSKey, reinterpret_cast<void*>(p));
+        ThreadEmulation::TLS_SET(RunLoopTLSKey, reinterpret_cast<void*>(p));
     }
     return *p;
 }

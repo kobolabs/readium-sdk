@@ -38,7 +38,7 @@ typedef shared_ptr<NavigationTable> NavigationTablePtr;
  @ingroup navigation
  */
 class NavigationTable : public NavigationElement, public PointerType<NavigationTable>, public OwnedBy<Package>
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 	, public NativeBridge
 #endif
 {

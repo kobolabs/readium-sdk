@@ -51,7 +51,7 @@ typedef struct xmlError* xmlErrorPtr;
 
 EPUB3_XML_BEGIN_NAMESPACE
 
-#if !EPUB_PLATFORM(WINRT)
+#if !EPUB_PLATFORM(WINRT) && !EPUB_PLATFORM(WIN_PHONE)
 // generic 'get me a wrapper' template
 /**
  @ingroup xml-utils
@@ -179,10 +179,10 @@ private:
     WrapperBase & operator = (WrapperBase & o);
 };
 
-#if EPUB_PLATFORM(WINRT)
+#if EPUB_PLATFORM(WINRT) || EPUB_PLATFORM(WIN_PHONE)
 #if EPUB_USE(WIN_PHONE_XML)
-typedef ::PhoneSupportInterfaces::IXmlNode		_NodeObj;
-typedef ::PhoneSupportInterfaces::IXmlElement	_ElementObj;
+typedef PhoneSupportInterfaces::IXmlNode		_NodeObj;
+typedef PhoneSupportInterfaces::IXmlElement	_ElementObj;
 #else // EPUB_USE(WIN_XML)
 typedef ::Windows::Data::Xml::Dom::IXmlNode		_NodeObj;
 typedef ::Windows::Data::Xml::Dom::IXmlElement	_ElementObj;
