@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <FileList
-	MinVSVersion = "13.0"
-	DisplayName = "Readium SDK for Windows Runtime (Windows 8.1)"
+	MinVSVersion = "12.0"
+	DisplayName = "Readium SDK for Windows Phone 8.1"
+	ProductFamilyName="Readium.WP8.1"
+	MoreInfo="http://readium.org/"
 	MaxPlatformVersion="8.1"
 	AppliesTo="WindowsAppContainer"
-	DependsOn="Microsoft.VCLibs, version=13.0"
+	DependsOn="Microsoft.VCLibs, version=12.0"
 	SupportsMultipleVersions="Error"
 	SupportedArchitectures="x86;ARM">
 	<File Reference = "Readium.winmd"
